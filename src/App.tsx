@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import HeroContent from './components/HeroContent';
 import ProductGrid from './components/ProductGrid';
 import FilterPanel from './components/FilterPanel';
 import AboutSection from './components/AboutSection';
@@ -51,6 +52,7 @@ function App() {
       {showHero && (
         <>
           <Hero onCategoryChange={handleCategoryChange} />
+          <HeroContent onCategoryChange={handleCategoryChange} />
           <AboutSection />
         </>
       )}

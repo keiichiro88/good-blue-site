@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Sprout, Coffee } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeroProps {
   onCategoryChange: (category: string) => void;
@@ -9,6 +9,10 @@ const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const slides = [
+    {
+      image: '/images/hero/20240521-362-1536x1024.jpg',
+      alt: 'GOOD BLUE 店内の様子'
+    },
     {
       image: '/images/hero/20240521-2-1024x682.jpg',
       alt: 'GOOD BLUE 外観'
@@ -34,7 +38,7 @@ const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000); // 5秒ごとに自動スライド
+    }, 4000); // 4秒ごとに自動スライド
 
     return () => clearInterval(timer);
   }, [slides.length]);
@@ -52,87 +56,56 @@ const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
   };
 
   return (
-    <div className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden">
+    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-100">
       {/* スライド画像 */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
-            index === currentSlide ? 'translate-x-0' : index < currentSlide ? '-translate-x-full' : 'translate-x-full'
-          }`}
-        >
-          <img
-            src={slide.image}
-            alt={slide.alt}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-      ))}
-
-      {/* オーバーレイコンテンツ */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center text-white px-4 max-w-5xl mx-auto">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            青空の下で過ごす
-            <span className="text-good-blue-gold block mt-2">良い時間をあなたに</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-            九重・くじゅうの希少な山野草と出会える唯一のフラワーショップ。<br />
-            つつましくて上品な草花と、こだわりのカフェで特別な時間を。
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => onCategoryChange('seedlings')}
-              className="flex items-center justify-center space-x-2 bg-good-blue-gold text-white px-8 py-3 rounded-lg hover:bg-good-blue-gold/90 transition-all duration-200 hover:scale-105 shadow-md backdrop-blur-sm bg-opacity-90"
-            >
-              <Sprout className="h-5 w-5" />
-              <span>花苗を見る</span>
-            </button>
-            <button
-              onClick={() => onCategoryChange('coffee')}
-              className="flex items-center justify-center space-x-2 bg-white/90 text-good-blue-gold border-2 border-good-blue-gold px-8 py-3 rounded-lg hover:bg-good-blue-gold hover:text-white transition-all duration-200 hover:scale-105 shadow-md backdrop-blur-sm"
-            >
-              <Coffee className="h-5 w-5" />
-              <span>カフェメニュー</span>
-            </button>
+      <div className="relative h-full">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              className="w-full h-full object-cover"
+            />
           </div>
-        </div>
+        ))}
       </div>
 
       {/* 矢印ボタン */}
       <button
         onClick={goToPrevious}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors duration-200"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 text-good-blue-brown p-2 rounded-full hover:bg-white transition-colors duration-200 shadow-md"
         aria-label="前のスライド"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={goToNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors duration-200"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 text-good-blue-brown p-2 rounded-full hover:bg-white transition-colors duration-200 shadow-md"
         aria-label="次のスライド"
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-5 w-5" />
       </button>
 
       {/* インジケーター */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/70'
+                ? 'bg-good-blue-gold w-6'
+                : 'bg-white/60 hover:bg-white/80'
             }`}
             aria-label={`スライド ${index + 1}`}
           />
         ))}
       </div>
-
     </div>
   );
 };

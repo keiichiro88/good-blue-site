@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
 import FilterPanel from './components/FilterPanel';
+import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
 import { Phone } from 'lucide-react';
 import { products } from './data/products';
@@ -48,7 +49,10 @@ function App() {
       />
       
       {showHero && (
-        <Hero onCategoryChange={handleCategoryChange} />
+        <>
+          <Hero onCategoryChange={handleCategoryChange} />
+          <AboutSection />
+        </>
       )}
 
       {showProducts && (

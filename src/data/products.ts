@@ -1,84 +1,84 @@
 import { Product } from '../types';
 
 export const products: Product[] = [
-  // Flowers
+  // 山野草 - Mountain Wildflowers
   {
     id: '1',
-    name: '季節のブーケ',
-    price: 3500,
-    category: 'seedlings',
-    subcategory: 'houseplants',
-    image: 'https://images.pexels.com/photos/1179863/pexels-photo-1179863.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: '九重の季節の花を使った特別なブーケ',
-    difficulty: 'easy',
-    inStock: true,
-    rating: 4.8,
-    reviews: 45
-  },
-  {
-    id: '2',
-    name: 'ラベンダーの鉢植え',
+    name: 'ヤマシャクヤク（山芍薬）',
     price: 2800,
     category: 'seedlings',
     subcategory: 'houseplants',
-    image: 'https://images.pexels.com/photos/207518/pexels-photo-207518.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: '香り豊かなラベンダーの鉢植え、リラックス効果抜群',
-    difficulty: 'easy',
-    inStock: true,
-    rating: 4.7,
-    reviews: 32
-  },
-  {
-    id: '3',
-    name: 'バラのアレンジメント',
-    price: 4500,
-    category: 'seedlings',
-    subcategory: 'flowering-trees',
-    image: 'https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: '特別な日のための華やかなバラのアレンジメント',
+    image: 'https://images.pexels.com/photos/5858235/pexels-photo-5858235.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: '春に美しいピンクの花を咲かせる九重の山野草',
     difficulty: 'medium',
     inStock: true,
     rating: 4.9,
-    reviews: 28
+    reviews: 23
   },
   {
-    id: '4',
-    name: 'サボテン寄せ植え',
-    price: 3200,
+    id: '2',
+    name: 'キキョウ（桔梗）',
+    price: 2500,
     category: 'seedlings',
     subcategory: 'houseplants',
-    image: 'https://images.pexels.com/photos/1903965/pexels-photo-1903965.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: 'お手入れ簡単で人気の多肉植物の寄せ植え',
-    difficulty: 'easy',
-    inStock: true,
-    rating: 4.6,
-    reviews: 41
-  },
-  {
-    id: '5',
-    name: 'プリザーブドフラワー',
-    price: 4800,
-    category: 'seedlings',
-    subcategory: 'houseplants',
-    image: 'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: '特殊加工で長期保存可能な美しい花',
+    image: 'https://images.pexels.com/photos/5651174/pexels-photo-5651174.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: '秋の七草のひとつ。深い青紫色の花が美しい',
     difficulty: 'easy',
     inStock: true,
     rating: 4.8,
-    reviews: 56
+    reviews: 18
   },
   {
-    id: '6',
-    name: 'ハーブの寄せ植え',
+    id: '3',
+    name: 'ミヤマオダマキ（深山苧巻）',
+    price: 3200,
+    category: 'seedlings',
+    subcategory: 'flowering-trees',
+    image: 'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: '高山性の希少なシダ植物。清楚な姿が魅力',
+    difficulty: 'hard',
+    inStock: true,
+    rating: 4.7,
+    reviews: 15
+  },
+  {
+    id: '4',
+    name: 'ヤマラッキョウ（山柳京）',
     price: 2600,
     category: 'seedlings',
     subcategory: 'houseplants',
-    image: 'https://images.pexels.com/photos/4750379/pexels-photo-4750379.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: '料理にも使える便利なハーブの寄せ植え',
+    image: 'https://images.pexels.com/photos/2860804/pexels-photo-2860804.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: '白い可愛らしい花を咲かせる九州の山野草',
+    difficulty: 'medium',
+    inStock: true,
+    rating: 4.8,
+    reviews: 21
+  },
+  {
+    id: '5',
+    name: 'ノコンギク（野紺菊）',
+    price: 2200,
+    category: 'seedlings',
+    subcategory: 'houseplants',
+    image: 'https://images.pexels.com/photos/2058499/pexels-photo-2058499.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: '淡い紫色の花が秋を彩る野草',
     difficulty: 'easy',
     inStock: true,
-    rating: 4.5,
-    reviews: 38
+    rating: 4.6,
+    reviews: 29
+  },
+  {
+    id: '6',
+    name: 'フシグロセンノウ（節黒仙翁）',
+    price: 3500,
+    category: 'seedlings',
+    subcategory: 'houseplants',
+    image: 'https://images.pexels.com/photos/5763829/pexels-photo-5763829.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: '黒紫色のシックな花が特徴の希少種',
+    difficulty: 'hard',
+    inStock: true,
+    rating: 4.9,
+    reviews: 12
   },
   // Cafe Menu
   {

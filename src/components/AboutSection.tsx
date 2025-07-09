@@ -1,0 +1,81 @@
+import React from 'react';
+import { Flower2, Dog, Coffee, MapPin } from 'lucide-react';
+
+const AboutSection: React.FC = () => {
+  return (
+    <section className="py-16 bg-good-blue-light">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* 店主からのメッセージ */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-good-blue-brown text-center mb-8">店主からのメッセージ</h2>
+          <div className="bg-white rounded-lg shadow-md p-8 max-w-4xl mx-auto">
+            <p className="text-good-blue-brown/80 leading-relaxed mb-6">
+              九重町の大自然に魅了されて移住をし、2023年に、この地域に来た人が気軽に立ち寄っていただける花屋＆カフェ「goodblue」をOPENしました。
+            </p>
+            <p className="text-good-blue-brown/80 leading-relaxed mb-6">
+              当店は『青空の下で過ごす良い時間』をテーマにしています。花束や切り花ではなく花苗の販売をしています。お庭に植えた苗の成長を青空の下で感じて頂きたい。また翌年の同じ季節になると新芽を出し綺麗な花をその先何年も付けて、ずっと良い時間を過ごして頂きたい。そういう想いでお客様をお迎えしています。
+            </p>
+            <p className="text-good-blue-brown/80 leading-relaxed mb-6">
+              また敷地内にドッグランもあります。愛犬と一緒に青空の下で良い時間を過ごして下さい。店内のカフェスペースはワンちゃん歓迎です。ランの後や花を見ながら自然の環境に近い店内でのんびりとした時間を楽しんで頂けたら幸いです。
+            </p>
+            <p className="text-right text-good-blue-brown font-medium">
+              goodblue 店主　的場達郎
+            </p>
+          </div>
+        </div>
+
+        {/* 特徴セクション */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* 山野草の魅力 */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center mb-4">
+              <Flower2 className="h-8 w-8 text-good-blue-gold mr-3" />
+              <h3 className="text-xl font-semibold text-good-blue-brown">希少な山野草が彩る</h3>
+            </div>
+            <p className="text-good-blue-brown/80 text-sm leading-relaxed">
+              当店で取り扱う品種の中心は、九重・くじゅうの大自然に自生する希少な山野草です。一般的な園芸種とは違い、派手さはないけれど、つつましくて上品な草花がたくさん揃っています。
+            </p>
+          </div>
+
+          {/* ドッグラン */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center mb-4">
+              <Dog className="h-8 w-8 text-good-blue-gold mr-3" />
+              <h3 className="text-xl font-semibold text-good-blue-brown">ドッグラン完備</h3>
+            </div>
+            <p className="text-good-blue-brown/80 text-sm leading-relaxed">
+              愛犬と一緒に楽しめる広々としたドッグランを完備。青空の下、自然豊かな環境で愛犬との特別な時間をお過ごしいただけます。カフェスペースもワンちゃん同伴OK！
+            </p>
+          </div>
+
+          {/* カフェ */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center mb-4">
+              <Coffee className="h-8 w-8 text-good-blue-gold mr-3" />
+              <h3 className="text-xl font-semibold text-good-blue-brown">くつろぎのカフェ</h3>
+            </div>
+            <p className="text-good-blue-brown/80 text-sm leading-relaxed">
+              花々に囲まれた店内で、こだわりのコーヒーと手作りスイーツをお楽しみください。自然の環境に近い落ち着いた空間で、ゆっくりとした時間をお過ごしいただけます。
+            </p>
+          </div>
+        </div>
+
+        {/* 青空の下で過ごす良い時間 */}
+        <div className="mt-16 text-center">
+          <div className="bg-gradient-to-r from-good-blue-gold/10 to-good-blue-gold/5 rounded-lg p-12">
+            <h3 className="text-2xl font-bold text-good-blue-brown mb-6">
+              『青空の下で過ごす良い時間』
+            </h3>
+            <p className="text-good-blue-brown/80 max-w-3xl mx-auto leading-relaxed">
+              お庭に植えた苗の成長を青空の下で感じていただき、<br />
+              翌年の同じ季節に新芽を出し、綺麗な花を咲かせる喜びを。<br />
+              その先何年も続く、良い時間をお届けします。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutSection;

@@ -12,9 +12,9 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
 
   const categories = {
     seedlings: [
-      { id: 'houseplants', name: '鉢花・観葉植物' },
-      { id: 'flowering-trees', name: 'アレンジメント' },
-      { id: 'preserved', name: 'プリザーブドフラワー' }
+      { id: 'houseplants', name: '山野草' },
+      { id: 'flowering-trees', name: '季節の花苗' },
+      { id: 'preserved', name: '希少植物' }
     ],
     coffee: [
       { id: 'single-origin', name: 'コーヒー' },
@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
                 className="text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 font-medium"
                 onClick={() => onCategoryChange('seedlings')}
               >
-                フラワー
+                花苗
               </button>
               <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 {categories.seedlings.map((cat) => (
@@ -143,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
                   className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
                   onClick={() => { onCategoryChange('seedlings'); setIsMenuOpen(false); }}
                 >
-                  フラワー
+                  花苗
                 </button>
                 <button
                   className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"

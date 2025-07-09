@@ -10,12 +10,12 @@ const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
     <div className="bg-gradient-to-r from-good-blue-gold/20 to-good-blue-gold/10 py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-good-blue-brown mb-6 leading-tight">
-          九重の大自然に囲まれた
-          <span className="text-good-blue-gold block">花とカフェの空間</span>
+          青空の下で過ごす
+          <span className="text-good-blue-gold block">良い時間をあなたに</span>
         </h1>
         <p className="text-xl text-good-blue-brown/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-          くじゅう野の花の郷に隣接する、花とコーヒーの香りに包まれた癒しの空間。<br />
-          季節の花々と、こだわりのコーヒーで特別なひとときをお過ごしください。
+          九重・くじゅうの希少な山野草と出会える唯一のフラワーショップ。<br />
+          つつましくて上品な草花と、こだわりのカフェで特別な時間をお過ごしください。
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

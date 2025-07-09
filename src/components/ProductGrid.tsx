@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Grid, List, SortAsc } from 'lucide-react';
 import ProductCard from './ProductCard';
+import ProductListView from './ProductListView';
 import { Product, FilterOptions } from '../types';
 
 interface ProductGridProps {
@@ -141,12 +142,21 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
             : 'space-y-4'
         }`}>
           {filteredProducts.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-              onProductClick={onProductClick}
-            />
+            viewMode === 'grid' ? (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={onAddToCart}
+                onProductClick={onProductClick}
+              />
+            ) : (
+              <ProductListView
+                key={product.id}
+                product={product}
+                onAddToCart={onAddToCart}
+                onProductClick={onProductClick}
+              />
+            )
           ))}
         </div>
       )}

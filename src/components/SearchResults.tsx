@@ -10,6 +10,8 @@ interface SearchResultsProps {
   onProductClick: (product: Product) => void;
   onAddToCart: (product: Product) => void;
   onClearSearch: () => void;
+  onToggleFavorite?: (product: Product) => void;
+  isFavorite?: (productId: string) => boolean;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
@@ -17,7 +19,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   products,
   onProductClick,
   onAddToCart,
-  onClearSearch
+  onClearSearch,
+  onToggleFavorite,
+  isFavorite
 }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'rating'>('name');
@@ -156,6 +160,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                 product={product}
                 onAddToCart={onAddToCart}
                 onProductClick={onProductClick}
+                onToggleFavorite={onToggleFavorite}
+                isFavorite={isFavorite ? isFavorite(product.id) : false}
               />
             ) : (
               <ProductListView
@@ -163,6 +169,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                 product={product}
                 onAddToCart={onAddToCart}
                 onProductClick={onProductClick}
+                onToggleFavorite={onToggleFavorite}
+                isFavorite={isFavorite ? isFavorite(product.id) : false}
               />
             )
           ))}

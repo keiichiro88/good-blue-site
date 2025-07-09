@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShoppingCart, Heart, Truck, Shield, Leaf, Plus, Minus } from 'lucide-react';
-import { Product } from '../types';
+import { ArrowLeft, ShoppingCart, Heart, Truck, Shield, Leaf, Plus, Minus, MessageSquare } from 'lucide-react';
+import { Product, Review } from '../types';
+import ReviewSummary from './ReviewSummary';
+import ReviewList from './ReviewList';
+import ReviewForm from './ReviewForm';
 
 interface ProductDetailProps {
   product: Product;
@@ -8,6 +11,11 @@ interface ProductDetailProps {
   onGoBack: () => void;
   relatedProducts: Product[];
   onProductClick: (product: Product) => void;
+  onToggleFavorite?: (product: Product) => void;
+  isFavorite?: boolean;
+  reviews: Review[];
+  onReviewSubmit?: (review: { productId: string; userName: string; rating: number; comment: string }) => void;
+  onReviewHelpful?: (reviewId: string) => void;
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ 
@@ -15,10 +23,17 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   onAddToCart, 
   onGoBack,
   relatedProducts,
-  onProductClick
+  onProductClick,
+  onToggleFavorite,
+  isFavorite = false,
+  reviews,
+  onReviewSubmit,
+  onReviewHelpful
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [activeTab, setActiveTab] = useState<'details' | 'reviews'>('details');
   
   // 商品画像の配列（実際の実装では複数画像を用意）
   const productImages = [
@@ -195,8 +210,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 <ShoppingCart className="h-5 w-5" />
                 {product.inStock ? 'カートに追加' : '在庫切れ'}
               </button>
-              <button className="p-3 border border-good-blue-gold/30 hover:border-good-blue-gold rounded-lg transition-colors">
-                <Heart className="h-5 w-5 text-good-blue-brown" />
+              <button 
+                onClick={() => onToggleFavorite && onToggleFavorite(product)}
+                className="p-3 border border-good-blue-gold/30 hover:border-good-blue-gold rounded-lg transition-colors"
+              >
+                <Heart className={`h-5 w-5 ${
+                  isFavorite ? 'text-red-500 fill-current' : 'text-good-blue-brown'
+                }`} />
               </button>
             </div>
           </div>
@@ -256,6 +276,52 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             </div>
           )}
         </div>
+      </div>
+
+      {/* レビューセクション */}
+      <div className="mt-16 border-t pt-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-good-blue-brown flex items-center gap-2">
+            <MessageSquare className="h-6 w-6" />
+            カスタマーレビュー
+          </h2>
+          {!showReviewForm && (
+            <button
+              onClick={() => setShowReviewForm(true)}
+              className="bg-good-blue-gold text-white px-4 py-2 rounded-lg hover:bg-good-blue-gold/90 transition-colors text-sm font-medium"
+            >
+              レビューを書く
+            </button>
+          )}
+        </div>
+
+        {/* レビューフォーム */}
+        {showReviewForm && onReviewSubmit && (
+          <div className="mb-8">
+            <ReviewForm
+              productId={product.id}
+              onSubmit={(review) => {
+                onReviewSubmit(review);
+                setShowReviewForm(false);
+              }}
+              onCancel={() => setShowReviewForm(false)}
+            />
+          </div>
+        )}
+
+        {/* レビューサマリー */}
+        <div className="mb-8">
+          <ReviewSummary
+            reviews={reviews}
+            averageRating={product.rating}
+          />
+        </div>
+
+        {/* レビューリスト */}
+        <ReviewList
+          reviews={reviews}
+          onHelpful={onReviewHelpful}
+        />
       </div>
 
       {/* 関連商品 */}

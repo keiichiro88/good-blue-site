@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Search, ShoppingCart, User, Menu } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, Heart } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 
 interface HeaderProps {
   onCategoryChange: (category: string) => void;
   cartItemCount: number;
   onSearch: (query: string) => void;
+  favoritesCount: number;
 }
 
-const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount, onSearch }) => {
+const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount, onSearch, favoritesCount }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -121,6 +122,17 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount, onSear
           <div className="flex items-center space-x-2 md:space-x-4">
             <button className="hidden md:block p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200">
               <User className="h-6 w-6" />
+            </button>
+            <button 
+              className="p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 relative"
+              onClick={() => onCategoryChange('favorites')}
+            >
+              <Heart className="h-5 w-5 md:h-6 md:w-6" />
+              {favoritesCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {favoritesCount}
+                </span>
+              )}
             </button>
             <button 
               className="p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 relative"

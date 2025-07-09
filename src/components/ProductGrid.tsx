@@ -9,9 +9,11 @@ interface ProductGridProps {
   filters: FilterOptions;
   onAddToCart: (product: Product) => void;
   onProductClick?: (product: Product) => void;
+  onToggleFavorite?: (product: Product) => void;
+  isFavorite?: (productId: string) => boolean;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCart, onProductClick }) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCart, onProductClick, onToggleFavorite, isFavorite }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'rating'>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
@@ -148,6 +150,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
                 product={product}
                 onAddToCart={onAddToCart}
                 onProductClick={onProductClick}
+                onToggleFavorite={onToggleFavorite}
+                isFavorite={isFavorite ? isFavorite(product.id) : false}
               />
             ) : (
               <ProductListView
@@ -155,6 +159,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
                 product={product}
                 onAddToCart={onAddToCart}
                 onProductClick={onProductClick}
+                onToggleFavorite={onToggleFavorite}
+                isFavorite={isFavorite ? isFavorite(product.id) : false}
               />
             )
           ))}

@@ -1,14 +1,16 @@
 import React from 'react';
-import { ShoppingCart, Heart } from 'lucide-react';
+import { ShoppingCart, Heart, Star } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
   onProductClick?: (product: Product) => void;
+  onToggleFavorite?: (product: Product) => void;
+  isFavorite?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onProductClick }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onProductClick, onToggleFavorite, isFavorite = false }) => {
   const getDifficultyColor = (difficulty?: string) => {
     switch (difficulty) {
       case 'easy': return 'bg-green-50 text-green-700';
@@ -61,8 +63,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onProdu
             オーガニック
           </span>
         )}
-        <button className="absolute top-1 right-1 sm:top-2 sm:right-2 p-1.5 sm:p-2 bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-good-blue-light">
-          <Heart className="h-3 sm:h-4 w-3 sm:w-4 text-good-blue-brown" />
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite && onToggleFavorite(product);
+          }}
+          className={`absolute top-1 right-1 sm:top-2 sm:right-2 p-1.5 sm:p-2 bg-white rounded-full shadow-md transition-all duration-300 ${
+            isFavorite ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+          } hover:bg-good-blue-light`}
+        >
+          <Heart className={`h-3 sm:h-4 w-3 sm:w-4 ${
+            isFavorite ? 'text-red-500 fill-current' : 'text-good-blue-brown'
+          }`} />
         </button>
       </div>
       
@@ -76,7 +88,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onProdu
         </h3>
         
         {/* Description */}
-        <p className="text-xs text-good-blue-brown/70 mb-3 line-clamp-2 flex-grow">{product.description}</p>
+        <p className="text-xs text-good-blue-brown/70 mb-2 line-clamp-2">{product.description}</p>
+        
+        {/* Rating */}
+        {product.rating > 0 && (
+          <div className="flex items-center gap-1 mb-3">
+            <div className="flex items-center">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  className={`h-3 w-3 ${
+                    star <= Math.round(product.rating)
+                      ? 'text-yellow-400 fill-current'
+                      : 'text-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-good-blue-brown/60">
+              ({product.reviews})
+            </span>
+          </div>
+        )}
         
         {/* Price and Cart Button */}
         <div className="mt-auto">

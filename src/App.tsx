@@ -11,9 +11,11 @@ import Toast from './components/Toast';
 import ProductDetail from './components/ProductDetail';
 import Checkout from './components/Checkout';
 import SearchResults from './components/SearchResults';
+import Favorites from './components/Favorites';
 import { Phone } from 'lucide-react';
 import { products } from './data/products';
-import { Product, FilterOptions, CartItem } from './types';
+import { reviews as initialReviews } from './data/reviews';
+import { Product, FilterOptions, CartItem, Review } from './types';
 
 function App() {
   const [currentCategory, setCurrentCategory] = useState<string>('all');
@@ -24,6 +26,8 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showCheckout, setShowCheckout] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [favorites, setFavorites] = useState<Product[]>([]);
+  const [reviews, setReviews] = useState<Review[]>(initialReviews);
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
@@ -111,6 +115,62 @@ function App() {
     setCurrentCategory('all');
   };
 
+  const handleToggleFavorite = (product: Product) => {
+    setFavorites(prevFavorites => {
+      const isFavorite = prevFavorites.some(fav => fav.id === product.id);
+      if (isFavorite) {
+        setToast({ show: true, message: `${product.name}をお気に入りから削除しました` });
+        return prevFavorites.filter(fav => fav.id !== product.id);
+      } else {
+        setToast({ show: true, message: `${product.name}をお気に入りに追加しました` });
+        return [...prevFavorites, product];
+      }
+    });
+  };
+
+  const handleRemoveFavorite = (productId: string) => {
+    setFavorites(prevFavorites => {
+      const product = prevFavorites.find(fav => fav.id === productId);
+      if (product) {
+        setToast({ show: true, message: `${product.name}をお気に入りから削除しました` });
+      }
+      return prevFavorites.filter(fav => fav.id !== productId);
+    });
+  };
+
+  const isFavorite = (productId: string) => {
+    return favorites.some(fav => fav.id === productId);
+  };
+
+  const handleReviewSubmit = (review: { productId: string; userName: string; rating: number; comment: string }) => {
+    const newReview: Review = {
+      id: `r${reviews.length + 1}`,
+      productId: review.productId,
+      userName: review.userName,
+      rating: review.rating,
+      comment: review.comment,
+      date: new Date().toISOString().split('T')[0],
+      helpful: 0,
+      verified: false
+    };
+    setReviews([...reviews, newReview]);
+    setToast({ show: true, message: 'レビューを投稿しました' });
+  };
+
+  const handleReviewHelpful = (reviewId: string) => {
+    setReviews(prevReviews =>
+      prevReviews.map(review =>
+        review.id === reviewId
+          ? { ...review, helpful: review.helpful + 1 }
+          : review
+      )
+    );
+  };
+
+  const getProductReviews = (productId: string) => {
+    return reviews.filter(review => review.productId === productId);
+  };
+
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const showHero = currentCategory === 'all' && !selectedProduct;
@@ -119,6 +179,7 @@ function App() {
   const showProductDetail = selectedProduct !== null;
   const showCheckoutPage = showCheckout && currentCategory === 'checkout';
   const showSearchResults = currentCategory === 'search' && !selectedProduct;
+  const showFavorites = currentCategory === 'favorites' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -126,6 +187,7 @@ function App() {
         onCategoryChange={handleCategoryChange} 
         cartItemCount={cartItemCount}
         onSearch={handleSearch}
+        favoritesCount={favorites.length}
       />
       
       {showHero && (
@@ -155,6 +217,8 @@ function App() {
                 filters={filters}
                 onAddToCart={handleAddToCart}
                 onProductClick={handleProductClick}
+                onToggleFavorite={handleToggleFavorite}
+                isFavorite={isFavorite}
               />
             </div>
           </div>
@@ -168,6 +232,11 @@ function App() {
           onGoBack={handleGoBack}
           relatedProducts={getRelatedProducts(selectedProduct)}
           onProductClick={handleProductClick}
+          onToggleFavorite={handleToggleFavorite}
+          isFavorite={isFavorite(selectedProduct.id)}
+          reviews={getProductReviews(selectedProduct.id)}
+          onReviewSubmit={handleReviewSubmit}
+          onReviewHelpful={handleReviewHelpful}
         />
       )}
 
@@ -199,6 +268,18 @@ function App() {
           onProductClick={handleProductClick}
           onAddToCart={handleAddToCart}
           onClearSearch={handleClearSearch}
+          onToggleFavorite={handleToggleFavorite}
+          isFavorite={isFavorite}
+        />
+      )}
+
+      {showFavorites && (
+        <Favorites
+          favorites={favorites}
+          onProductClick={handleProductClick}
+          onAddToCart={handleAddToCart}
+          onRemoveFavorite={handleRemoveFavorite}
+          onContinueShopping={handleContinueShopping}
         />
       )}
 

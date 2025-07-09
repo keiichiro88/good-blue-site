@@ -1,14 +1,16 @@
 import React from 'react';
-import { ShoppingCart, Heart } from 'lucide-react';
+import { ShoppingCart, Heart, Star } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductListViewProps {
   product: Product;
   onAddToCart: (product: Product) => void;
   onProductClick?: (product: Product) => void;
+  onToggleFavorite?: (product: Product) => void;
+  isFavorite?: boolean;
 }
 
-const ProductListView: React.FC<ProductListViewProps> = ({ product, onAddToCart, onProductClick }) => {
+const ProductListView: React.FC<ProductListViewProps> = ({ product, onAddToCart, onProductClick, onToggleFavorite, isFavorite = false }) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
       <div className="flex gap-4">
@@ -33,14 +35,43 @@ const ProductListView: React.FC<ProductListViewProps> = ({ product, onAddToCart,
             >
               {product.name}
             </h3>
-            <button className="p-2 hover:bg-good-blue-light rounded-full transition-colors">
-              <Heart className="h-4 w-4 text-good-blue-brown" />
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleFavorite && onToggleFavorite(product);
+              }}
+              className="p-2 hover:bg-good-blue-light rounded-full transition-colors"
+            >
+              <Heart className={`h-4 w-4 ${
+                isFavorite ? 'text-red-500 fill-current' : 'text-good-blue-brown'
+              }`} />
             </button>
           </div>
 
-          <p className="text-sm text-good-blue-brown/70 mb-3 line-clamp-2">
+          <p className="text-sm text-good-blue-brown/70 mb-2 line-clamp-2">
             {product.description}
           </p>
+
+          {/* Rating */}
+          {product.rating > 0 && (
+            <div className="flex items-center gap-1 mb-3">
+              <div className="flex items-center">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className={`h-3 w-3 ${
+                      star <= Math.round(product.rating)
+                        ? 'text-yellow-400 fill-current'
+                        : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-good-blue-brown/60">
+                ({product.reviews}件のレビュー)
+              </span>
+            </div>
+          )}
 
           <div className="flex items-center justify-between">
             <div>

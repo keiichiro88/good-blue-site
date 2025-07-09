@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu } from 'lucide-react';
+import MobileMenu from './MobileMenu';
 
 interface HeaderProps {
   onCategoryChange: (category: string) => void;
@@ -28,8 +29,8 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center">
-            <img src="/images/logo.png" alt="GOOD BLUE FLOWER & CAFE" className="h-12 w-auto" />
+          <div className="flex items-center cursor-pointer" onClick={() => onCategoryChange('all')}>
+            <img src="/images/logo.png" alt="GOOD BLUE FLOWER & CAFE" className="h-10 md:h-12 w-auto" />
           </div>
 
           {/* Desktop Navigation */}
@@ -103,12 +104,15 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
           </div>
 
           {/* Right Side Icons */}
-          <div className="flex items-center space-x-4">
-            <button className="p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200">
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <button className="hidden md:block p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200">
               <User className="h-6 w-6" />
             </button>
-            <button className="p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 relative">
-              <ShoppingCart className="h-6 w-6" />
+            <button 
+              className="p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 relative"
+              onClick={() => onCategoryChange('cart')}
+            >
+              <ShoppingCart className="h-5 w-5 md:h-6 md:w-6" />
               {cartItemCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-good-blue-gold text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {cartItemCount}
@@ -119,55 +123,18 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
               className="md:hidden p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Menu className="h-6 w-6" />
             </button>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
-            <div className="space-y-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <input
-                  type="text"
-                  placeholder="花・カフェメニューを検索..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-green focus:border-transparent"
-                />
-              </div>
-              <div className="space-y-2">
-                <button
-                  className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
-                  onClick={() => { onCategoryChange('seedlings'); setIsMenuOpen(false); }}
-                >
-                  花苗
-                </button>
-                <button
-                  className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
-                  onClick={() => { onCategoryChange('coffee'); setIsMenuOpen(false); }}
-                >
-                  カフェ
-                </button>
-                <button
-                  className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
-                  onClick={() => { onCategoryChange('guide'); setIsMenuOpen(false); }}
-                >
-                  アクセス
-                </button>
-                <button
-                  className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
-                  onClick={() => { onCategoryChange('care'); setIsMenuOpen(false); }}
-                >
-                  お問い合わせ
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
+      
+      {/* Mobile Menu Component */}
+      <MobileMenu 
+        isOpen={isMenuOpen} 
+        onClose={() => setIsMenuOpen(false)} 
+        onCategoryChange={onCategoryChange}
+      />
     </header>
   );
 };

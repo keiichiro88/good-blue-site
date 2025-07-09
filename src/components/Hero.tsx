@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
   };
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-100">
+    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-100">
       {/* スライド画像 */}
       <div className="relative h-full">
         {slides.map((slide, index) => (

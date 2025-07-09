@@ -52,14 +52,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, isO
       {/* Mobile Filter Button */}
       <button
         onClick={onToggle}
-        className="md:hidden flex items-center space-x-2 px-4 py-2 bg-white border border-good-blue-gold/30 rounded-lg hover:bg-good-blue-light transition-colors duration-200"
+        className="md:hidden flex items-center space-x-2 px-4 py-2 bg-white border border-good-blue-gold/30 rounded-lg hover:bg-good-blue-light transition-colors duration-200 w-full justify-center mb-4"
       >
         <Filter className="h-4 w-4" />
-        <span>Filters</span>
+        <span>フィルター</span>
       </button>
 
       {/* Filter Panel */}
-      <div className={`${isOpen ? 'block' : 'hidden'} md:block bg-white rounded-lg shadow-md p-6 h-fit sticky top-20 border border-good-blue-gold/20`}>
+      <div className={`${isOpen ? 'block' : 'hidden'} md:block bg-white rounded-lg shadow-md p-4 md:p-6 h-fit md:sticky md:top-20 border border-good-blue-gold/20 mb-4 md:mb-0`}>
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-lg font-semibold text-good-blue-brown">フィルター</h3>
           <div className="flex items-center space-x-2">

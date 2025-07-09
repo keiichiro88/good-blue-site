@@ -76,14 +76,14 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
   return (
     <div className="flex-1">
       {/* Controls */}
-      <div className="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-sm">
-        <div className="flex items-center space-x-4">
-          <span className="text-sm text-gray-600">
-            {filteredProducts.length}件の商品が見つかりました
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white p-4 rounded-lg shadow-sm">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+          <span className="text-sm text-gray-600 whitespace-nowrap">
+            {filteredProducts.length}件の商品
           </span>
           
-          <div className="flex items-center space-x-2">
-            <SortAsc className="h-4 w-4 text-gray-500" />
+          <div className="flex items-center space-x-2 w-full sm:w-auto">
+            <SortAsc className="h-4 w-4 text-gray-500 hidden sm:block" />
             <select
               value={`${sortBy}-${sortOrder}`}
               onChange={(e) => {
@@ -91,7 +91,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
                 setSortBy(field as 'name' | 'price' | 'rating');
                 setSortOrder(order as 'asc' | 'desc');
               }}
-              className="text-sm border border-gray-300 rounded-md px-3 py-1 focus:ring-2 focus:ring-sage-green focus:border-transparent"
+              className="text-sm border border-gray-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-good-blue-gold focus:border-transparent w-full sm:w-auto"
             >
               <option value="name-asc">名前順（あ-ん）</option>
               <option value="name-desc">名前順（ん-あ）</option>
@@ -108,8 +108,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
             onClick={() => setViewMode('grid')}
             className={`p-2 rounded-md transition-colors duration-200 ${
               viewMode === 'grid' 
-                ? 'bg-sage-green text-white' 
-                : 'text-gray-600 hover:text-sage-green'
+                ? 'bg-good-blue-gold text-white' 
+                : 'text-gray-600 hover:text-good-blue-brown'
             }`}
           >
             <Grid className="h-4 w-4" />
@@ -118,8 +118,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
             onClick={() => setViewMode('list')}
             className={`p-2 rounded-md transition-colors duration-200 ${
               viewMode === 'list' 
-                ? 'bg-sage-green text-white' 
-                : 'text-gray-600 hover:text-sage-green'
+                ? 'bg-good-blue-gold text-white' 
+                : 'text-gray-600 hover:text-good-blue-brown'
             }`}
           >
             <List className="h-4 w-4" />

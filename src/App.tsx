@@ -6,6 +6,8 @@ import ProductGrid from './components/ProductGrid';
 import FilterPanel from './components/FilterPanel';
 import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
+import Cart from './components/Cart';
+import Toast from './components/Toast';
 import { Phone } from 'lucide-react';
 import { products } from './data/products';
 import { Product, FilterOptions, CartItem } from './types';
@@ -15,6 +17,7 @@ function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [filters, setFilters] = useState<FilterOptions>({ category: 'all' });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '' });
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
@@ -35,12 +38,41 @@ function App() {
       }
       return [...prevCart, { product, quantity: 1 }];
     });
+    setToast({ show: true, message: `${product.name}をカートに追加しました` });
+  };
+
+  const handleUpdateQuantity = (productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      handleRemoveItem(productId);
+      return;
+    }
+    setCart(prevCart =>
+      prevCart.map(item =>
+        item.product.id === productId
+          ? { ...item, quantity }
+          : item
+      )
+    );
+  };
+
+  const handleRemoveItem = (productId: string) => {
+    setCart(prevCart => prevCart.filter(item => item.product.id !== productId));
+  };
+
+  const handleContinueShopping = () => {
+    setCurrentCategory('all');
+  };
+
+  const handleCheckout = () => {
+    // TODO: チェックアウト処理の実装
+    alert('チェックアウト機能は開発中です');
   };
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const showHero = currentCategory === 'all';
   const showProducts = ['all', 'seedlings', 'coffee', 'houseplants', 'fruit-trees', 'flowering-trees', 'single-origin', 'blends', 'organic'].includes(currentCategory);
+  const showCart = currentCategory === 'cart';
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -79,6 +111,16 @@ function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {showCart && (
+        <Cart
+          cartItems={cart}
+          onUpdateQuantity={handleUpdateQuantity}
+          onRemoveItem={handleRemoveItem}
+          onContinueShopping={handleContinueShopping}
+          onCheckout={handleCheckout}
+        />
       )}
 
       {currentCategory === 'guide' && (
@@ -156,6 +198,12 @@ function App() {
       )}
 
       <Footer />
+      
+      <Toast
+        message={toast.message}
+        show={toast.show}
+        onClose={() => setToast({ show: false, message: '' })}
+      />
     </div>
   );
 }

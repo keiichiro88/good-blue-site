@@ -10,6 +10,7 @@ const Footer: React.FC = () => {
           <div>
             <img src="/images/logo.png" alt="GOOD BLUE FLOWER & CAFE" className="h-16 w-auto mb-4 filter brightness-0 invert" />
             <p className="text-sm text-good-blue-cream/80 mb-4">
+              花とカフェ goodblue (グッドブルー)<br />
               花とコーヒーの香りに包まれた、特別な時間をお届けします。
             </p>
             <div className="flex space-x-4">
@@ -33,19 +34,15 @@ const Footer: React.FC = () => {
                 <MapPin className="h-5 w-5 text-good-blue-gold mt-0.5" />
                 <div>
                   <p className="text-sm text-good-blue-cream/80">
-                    〒150-0001<br />
-                    東京都渋谷区神宮前1-2-3<br />
-                    グッドブルービル 1F
+                    〒879-4911<br />
+                    大分県玖珠郡九重町田野1672-18<br />
+                    <span className="text-xs">※お食事処「くじゅう野の花の郷」に隣接</span>
                   </p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-good-blue-gold" />
-                <p className="text-sm text-good-blue-cream/80">03-1234-5678</p>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-good-blue-gold" />
-                <p className="text-sm text-good-blue-cream/80">info@goodblue.jp</p>
+                <p className="text-sm text-good-blue-cream/80">090-3013-7032</p>
               </div>
             </div>
           </div>
@@ -57,10 +54,10 @@ const Footer: React.FC = () => {
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-good-blue-gold mt-0.5" />
                 <div className="text-sm text-good-blue-cream/80">
-                  <p><span className="font-medium">平日</span> 9:00 - 20:00</p>
-                  <p><span className="font-medium">土日祝</span> 10:00 - 19:00</p>
+                  <p><span className="font-medium">営業時間</span> 10:00 - 16:00</p>
+                  <p><span className="font-medium">店休日</span> 不定休</p>
                   <p className="mt-2 text-good-blue-cream/60">
-                    ※カフェラストオーダー 閉店30分前
+                    ※詳しくはお問い合わせください
                   </p>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
 import FilterPanel from './components/FilterPanel';
+import Footer from './components/Footer';
 import { products } from './data/products';
 import { Product, FilterOptions, CartItem } from './types';
 
@@ -110,6 +111,8 @@ function App() {
           </div>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

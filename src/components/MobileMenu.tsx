@@ -1,16 +1,27 @@
-import React from 'react';
-import { X, Home, Flower2, Coffee, MapPin, Phone } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Home, Flower2, Coffee, MapPin, Phone, Search } from 'lucide-react';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onCategoryChange: (category: string) => void;
+  onSearch: (query: string) => void;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onCategoryChange }) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onCategoryChange, onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const handleNavigate = (category: string) => {
     onCategoryChange(category);
     onClose();
+  };
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      onSearch(searchQuery.trim());
+      setSearchQuery('');
+      onClose();
+    }
   };
 
   return (
@@ -37,6 +48,25 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onCategoryChan
           >
             <X className="h-5 w-5 text-good-blue-brown" />
           </button>
+        </div>
+
+        {/* 検索バー */}
+        <div className="p-4 border-b border-good-blue-gold/20">
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <input
+                type="text"
+                placeholder="商品を検索..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-good-blue-gold focus:border-transparent"
+              />
+            </div>
+          </form>
         </div>
 
         <nav className="p-4">

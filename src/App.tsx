@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import Toast from './components/Toast';
 import ProductDetail from './components/ProductDetail';
 import Checkout from './components/Checkout';
+import SearchResults from './components/SearchResults';
 import { Phone } from 'lucide-react';
 import { products } from './data/products';
 import { Product, FilterOptions, CartItem } from './types';
@@ -22,6 +23,7 @@ function App() {
   const [toast, setToast] = useState({ show: false, message: '' });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
@@ -29,6 +31,7 @@ function App() {
       category: category === 'all' ? 'all' : category.includes('seedlings') || ['houseplants', 'fruit-trees', 'flowering-trees'].includes(category) ? 'seedlings' : category.includes('coffee') || ['single-origin', 'blends', 'organic'].includes(category) ? 'coffee' : 'all' 
     });
     setSelectedProduct(null); // カテゴリー変更時に商品詳細を閉じる
+    setSearchQuery(''); // カテゴリー変更時に検索をクリア
   };
 
   const handleAddToCart = (product: Product, quantity: number = 1) => {
@@ -97,6 +100,17 @@ function App() {
       .slice(0, 4);
   };
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setCurrentCategory('search');
+    setSelectedProduct(null);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setCurrentCategory('all');
+  };
+
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const showHero = currentCategory === 'all' && !selectedProduct;
@@ -104,12 +118,14 @@ function App() {
   const showCart = currentCategory === 'cart' && !showCheckout;
   const showProductDetail = selectedProduct !== null;
   const showCheckoutPage = showCheckout && currentCategory === 'checkout';
+  const showSearchResults = currentCategory === 'search' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
       <Header 
         onCategoryChange={handleCategoryChange} 
         cartItemCount={cartItemCount}
+        onSearch={handleSearch}
       />
       
       {showHero && (
@@ -173,6 +189,16 @@ function App() {
             setCurrentCategory('cart');
           }}
           onOrderComplete={handleOrderComplete}
+        />
+      )}
+
+      {showSearchResults && (
+        <SearchResults
+          searchQuery={searchQuery}
+          products={products}
+          onProductClick={handleProductClick}
+          onAddToCart={handleAddToCart}
+          onClearSearch={handleClearSearch}
         />
       )}
 

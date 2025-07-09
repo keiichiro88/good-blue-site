@@ -5,9 +5,10 @@ import MobileMenu from './MobileMenu';
 interface HeaderProps {
   onCategoryChange: (category: string) => void;
   cartItemCount: number;
+  onSearch: (query: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
+const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount, onSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -91,16 +92,29 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
 
           {/* Search Bar */}
           <div className="flex-1 max-w-lg mx-8 hidden md:block">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <input
-                type="text"
-                placeholder="植物・コーヒーを検索..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-green focus:border-transparent transition-all duration-200"
-              />
-            </div>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                onSearch(searchQuery.trim());
+              }
+            }}>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <input
+                  type="text"
+                  placeholder="植物・コーヒーを検索..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && searchQuery.trim()) {
+                      e.preventDefault();
+                      onSearch(searchQuery.trim());
+                    }
+                  }}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-good-blue-gold focus:border-transparent transition-all duration-200"
+                />
+              </div>
+            </form>
           </div>
 
           {/* Right Side Icons */}
@@ -134,6 +148,7 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
         isOpen={isMenuOpen} 
         onClose={() => setIsMenuOpen(false)} 
         onCategoryChange={onCategoryChange}
+        onSearch={onSearch}
       />
     </header>
   );

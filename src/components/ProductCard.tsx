@@ -10,19 +10,19 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const getDifficultyColor = (difficulty?: string) => {
     switch (difficulty) {
-      case 'easy': return 'bg-green-100 text-green-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'hard': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'easy': return 'bg-green-50 text-green-700';
+      case 'medium': return 'bg-yellow-50 text-yellow-700';
+      case 'hard': return 'bg-red-50 text-red-700';
+      default: return 'bg-gray-50 text-gray-700';
     }
   };
 
   const getRoastColor = (roastLevel?: string) => {
     switch (roastLevel) {
-      case 'light': return 'bg-amber-100 text-amber-800';
-      case 'medium': return 'bg-orange-100 text-orange-800';
-      case 'dark': return 'bg-stone-100 text-stone-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'light': return 'bg-amber-50 text-amber-700';
+      case 'medium': return 'bg-orange-50 text-orange-700';
+      case 'dark': return 'bg-stone-50 text-stone-700';
+      default: return 'bg-gray-50 text-gray-700';
     }
   };
 
@@ -45,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group border border-good-blue-gold/20">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group border border-good-blue-gold/20 flex flex-col">
       <div className="relative">
         <img
           src={product.image}
@@ -62,60 +62,70 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </button>
       </div>
       
-      <div className="p-4">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-lg font-semibold text-good-blue-brown truncate">{product.name}</h3>
-          <div className="flex items-center">
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <span className="ml-1 text-sm text-gray-600">{product.rating}</span>
+      <div className="p-4 flex flex-col flex-grow">
+        {/* Header with name and rating */}
+        <div className="mb-3">
+          <h3 className="text-base font-semibold text-good-blue-brown mb-1 line-clamp-2">{product.name}</h3>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center">
+              <Star className="h-4 w-4 text-yellow-400 fill-current" />
+              <span className="ml-1 text-sm text-gray-600">{product.rating}</span>
+            </div>
+            <span className="text-xs text-gray-500">
+              {product.reviews}件のレビュー
+            </span>
           </div>
         </div>
         
-        <p className="text-good-blue-brown/70 text-sm mb-3 line-clamp-2">{product.description}</p>
+        {/* Description */}
+        <p className="text-good-blue-brown/70 text-sm mb-3 line-clamp-2 flex-grow">{product.description}</p>
         
-        <div className="flex flex-wrap gap-2 mb-3">
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
           {product.difficulty && (
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(product.difficulty)}`}>
+            <span className={`px-2.5 py-0.5 rounded-md text-xs font-medium ${getDifficultyColor(product.difficulty)}`}>
               {getDifficultyLabel(product.difficulty)}
             </span>
           )}
           {product.roastLevel && (
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRoastColor(product.roastLevel)}`}>
+            <span className={`px-2.5 py-0.5 rounded-md text-xs font-medium ${getRoastColor(product.roastLevel)}`}>
               {getRoastLabel(product.roastLevel)}
             </span>
           )}
           {product.origin && (
-            <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            <span className="px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-50 text-blue-700">
               {product.origin}
             </span>
           )}
         </div>
         
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-good-blue-brown">¥{Math.round(product.price * 100)}</span>
-            {product.originalPrice && (
-              <span className="text-sm text-gray-500 line-through">¥{Math.round(product.originalPrice * 100)}</span>
-            )}
+        {/* Price and Cart Button */}
+        <div className="space-y-3 mt-auto">
+          {/* Price */}
+          <div className="flex items-baseline justify-between">
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-good-blue-brown">¥{product.price.toLocaleString()}</span>
+              {product.originalPrice && (
+                <span className="text-sm text-gray-500 line-through">¥{product.originalPrice.toLocaleString()}</span>
+              )}
+            </div>
           </div>
+          
+          {/* Cart Button */}
           <button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+            className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 ${
               product.inStock
-                ? 'bg-good-blue-gold text-white hover:bg-good-blue-gold/90 hover:scale-105'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                ? 'bg-good-blue-gold text-white hover:bg-good-blue-gold/90 hover:shadow-md active:scale-[0.98]'
+                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
             }`}
           >
             <ShoppingCart className="h-4 w-4" />
-            <span className="text-sm font-medium">
+            <span>
               {product.inStock ? 'カートに追加' : '在庫切れ'}
             </span>
           </button>
-        </div>
-        
-        <div className="mt-2 text-xs text-gray-500">
-          {product.reviews}件のレビュー
         </div>
       </div>
     </div>

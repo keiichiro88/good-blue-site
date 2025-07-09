@@ -5,7 +5,7 @@ export const products: Product[] = [
   {
     id: '1',
     name: 'ヤマシャクヤク（山芍薬）',
-    price: 2800,
+    price: 800,
     category: 'seedlings',
     subcategory: 'houseplants',
     image: '/images/products/20240521-121-1536x1024.jpg',
@@ -18,7 +18,7 @@ export const products: Product[] = [
   {
     id: '2',
     name: 'キキョウ（桔梗）',
-    price: 2500,
+    price: 600,
     category: 'seedlings',
     subcategory: 'houseplants',
     image: '/images/products/20240521-80-1536x1024.jpg',
@@ -31,7 +31,7 @@ export const products: Product[] = [
   {
     id: '3',
     name: 'ミヤマオダマキ（深山苧巻）',
-    price: 3200,
+    price: 1000,
     category: 'seedlings',
     subcategory: 'flowering-trees',
     image: '/images/products/20240521-270-1536x1024.jpg',
@@ -44,7 +44,7 @@ export const products: Product[] = [
   {
     id: '4',
     name: 'ヤマラッキョウ（山柳京）',
-    price: 2600,
+    price: 700,
     category: 'seedlings',
     subcategory: 'houseplants',
     image: '/images/products/20240521-296-1536x1024.jpg',
@@ -57,7 +57,7 @@ export const products: Product[] = [
   {
     id: '5',
     name: 'ノコンギク（野紺菊）',
-    price: 2200,
+    price: 500,
     category: 'seedlings',
     subcategory: 'houseplants',
     image: '/images/products/20240521-314-1536x1024.jpg',
@@ -70,7 +70,7 @@ export const products: Product[] = [
   {
     id: '6',
     name: 'フシグロセンノウ（節黒仙翁）',
-    price: 3500,
+    price: 900,
     category: 'seedlings',
     subcategory: 'houseplants',
     image: '/images/products/20240521-90-1536x1024.jpg',
@@ -84,7 +84,7 @@ export const products: Product[] = [
   {
     id: '7',
     name: 'スペシャルティコーヒー',
-    price: 1800,
+    price: 400,
     category: 'coffee',
     subcategory: 'single-origin',
     image: '/images/products/20240521-215-768x512.jpg',
@@ -99,7 +99,7 @@ export const products: Product[] = [
   {
     id: '8',
     name: '手作りケーキセット',
-    price: 2200,
+    price: 600,
     category: 'coffee',
     subcategory: 'blends',
     image: '/images/products/20240521-224-768x512.jpg',
@@ -114,7 +114,7 @@ export const products: Product[] = [
   {
     id: '9',
     name: '花のハーブティー',
-    price: 1500,
+    price: 350,
     category: 'coffee',
     subcategory: 'organic',
     image: '/images/products/20240521-286-768x512.jpg',
@@ -129,7 +129,7 @@ export const products: Product[] = [
   {
     id: '10',
     name: '季節のパフェ',
-    price: 2800,
+    price: 800,
     category: 'coffee',
     subcategory: 'blends',
     image: '/images/products/20240521-88-768x512.jpg',

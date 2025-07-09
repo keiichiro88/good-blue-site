@@ -12,14 +12,14 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
 
   const categories = {
     seedlings: [
-      { id: 'houseplants', name: '観葉植物' },
-      { id: 'fruit-trees', name: '果樹' },
-      { id: 'flowering-trees', name: '花木' }
+      { id: 'houseplants', name: '鉢花・観葉植物' },
+      { id: 'flowering-trees', name: 'アレンジメント' },
+      { id: 'preserved', name: 'プリザーブドフラワー' }
     ],
     coffee: [
-      { id: 'single-origin', name: 'シングルオリジン' },
-      { id: 'blends', name: 'ブレンド' },
-      { id: 'organic', name: 'オーガニック認証' }
+      { id: 'single-origin', name: 'コーヒー' },
+      { id: 'blends', name: 'ケーキ・スイーツ' },
+      { id: 'organic', name: 'ハーブティー' }
     ]
   };
 
@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
                 className="text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 font-medium"
                 onClick={() => onCategoryChange('seedlings')}
               >
-                苗木
+                フラワー
               </button>
               <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 {categories.seedlings.map((cat) => (
@@ -59,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
                 className="text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 font-medium"
                 onClick={() => onCategoryChange('coffee')}
               >
-                コーヒー豆
+                カフェ
               </button>
               <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 {categories.coffee.map((cat) => (
@@ -78,13 +78,13 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
               className="text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
               onClick={() => onCategoryChange('guide')}
             >
-              初心者ガイド
+              アクセス
             </button>
             <button
               className="text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
               onClick={() => onCategoryChange('care')}
             >
-              ケア用品
+              お問い合わせ
             </button>
           </nav>
 
@@ -132,7 +132,7 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <input
                   type="text"
-                  placeholder="植物・コーヒーを検索..."
+                  placeholder="花・カフェメニューを検索..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-green focus:border-transparent"
@@ -143,25 +143,25 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount }) => {
                   className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
                   onClick={() => { onCategoryChange('seedlings'); setIsMenuOpen(false); }}
                 >
-                  苗木
+                  フラワー
                 </button>
                 <button
                   className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
                   onClick={() => { onCategoryChange('coffee'); setIsMenuOpen(false); }}
                 >
-                  コーヒー豆
+                  カフェ
                 </button>
                 <button
                   className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
                   onClick={() => { onCategoryChange('guide'); setIsMenuOpen(false); }}
                 >
-                  初心者ガイド
+                  アクセス
                 </button>
                 <button
                   className="block w-full text-left text-dark-brown hover:text-sage-green transition-colors duration-200 font-medium"
                   onClick={() => { onCategoryChange('care'); setIsMenuOpen(false); }}
                 >
-                  ケア用品
+                  お問い合わせ
                 </button>
               </div>
             </div>

@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
 import FilterPanel from './components/FilterPanel';
 import Footer from './components/Footer';
+import { Phone } from 'lucide-react';
 import { products } from './data/products';
 import { Product, FilterOptions, CartItem } from './types';
 
@@ -73,29 +74,42 @@ function App() {
 
       {currentCategory === 'guide' && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-dark-brown mb-8 text-center">初心者ガイド</h2>
+          <h2 className="text-3xl font-bold text-good-blue-brown mb-8 text-center">アクセス</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold text-dark-brown mb-4">植物の基本的なお手入れ</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• 適切な照明条件の場所を選ぶ</li>
-                <li>• 一定の水やりを心がけ、水のやりすぎに注意</li>
-                <li>• 植物に適した水はけの良い土を使用</li>
-                <li>• 害虫や病気を定期的にチェック</li>
-                <li>• 成長を促すために必要に応じて剪定</li>
-              </ul>
+          <div className="bg-white rounded-lg shadow-md p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold text-good-blue-brown mb-4">店舗情報</h3>
+                <p className="text-good-blue-brown/80 mb-4">
+                  花とカフェ goodblue (グッドブルー)<br />
+                  〒879-4911<br />
+                  大分県玖珠郡九重町田野1672-18<br />
+                  TEL: 090-3013-7032
+                </p>
+                <p className="text-sm text-good-blue-brown/60">
+                  ※お食事処「くじゅう野の花の郷」に隣接
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold text-good-blue-brown mb-4">営業時間</h3>
+                <p className="text-good-blue-brown/80 mb-4">
+                  10:00 - 16:00<br />
+                  店休日：不定休
+                </p>
+                <p className="text-sm text-good-blue-brown/60">
+                  ※季節や天候により営業時間が変更になる場合がございます。<br />
+                  お越しの際は事前にお電話でご確認ください。
+                </p>
+              </div>
             </div>
             
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold text-dark-brown mb-4">コーヒー抽出のコツ</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• 焙煎から2-4週間以内の新鮮な豆を使用</li>
-                <li>• 抽出直前に豆を挽く</li>
-                <li>• 適切な水温（90-96℃）を保つ</li>
-                <li>• 正しいコーヒーと水の比率を守る</li>
-                <li>• 密閉容器で豆を保存</li>
-              </ul>
+            <div className="mt-8 pt-8 border-t border-good-blue-gold/20">
+              <h3 className="text-xl font-semibold text-good-blue-brown mb-4">交通アクセス</h3>
+              <p className="text-good-blue-brown/80">
+                九重の大自然に囲まれた素晴らしい環境でお待ちしております。<br />
+                お車でお越しの際は、「くじゅう野の花の郷」を目印にお越しください。
+              </p>
             </div>
           </div>
         </div>
@@ -103,11 +117,31 @@ function App() {
 
       {currentCategory === 'care' && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-dark-brown mb-8 text-center">ケア用品</h2>
-          <div className="text-center">
-            <p className="text-gray-600 text-lg">
-              プレミアムなケア用品を近日公開予定！オーガニック肥料から専門的なコーヒーアクセサリーまで。
+          <h2 className="text-3xl font-bold text-good-blue-brown mb-8 text-center">お問い合わせ</h2>
+          <div className="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto">
+            <p className="text-good-blue-brown/80 mb-6">
+              お花のご注文、カフェのご予約、その他ご不明な点がございましたら、<br />
+              お気軽にお問い合わせください。
             </p>
+            
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-good-blue-gold" />
+                <div>
+                  <p className="font-semibold text-good-blue-brown">090-3013-7032</p>
+                  <p className="text-sm text-good-blue-brown/60">受付時間: 10:00 - 16:00</p>
+                </div>
+              </div>
+              
+              <div className="mt-6 p-4 bg-good-blue-light rounded-lg">
+                <p className="text-sm text-good-blue-brown/80">
+                  <strong>ご注文について</strong><br />
+                  ・ブーケやアレンジメントは、ご希望をお伺いしてお作りいたします<br />
+                  ・季節の花の入荷状況により、ご希望に添えない場合がございます<br />
+                  ・カフェのご予約も承っております
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}

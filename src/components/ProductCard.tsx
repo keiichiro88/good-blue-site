@@ -50,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
         />
         {product.organic && (
           <span className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">

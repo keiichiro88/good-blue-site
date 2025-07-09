@@ -1,66 +1,138 @@
-import React from 'react';
-import { ArrowRight, Sprout, Coffee } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Sprout, Coffee } from 'lucide-react';
 
 interface HeroProps {
   onCategoryChange: (category: string) => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
-  return (
-    <div className="bg-gradient-to-r from-good-blue-gold/20 to-good-blue-gold/10 py-16 px-4">
-      <div className="max-w-7xl mx-auto text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-good-blue-brown mb-6 leading-tight">
-          青空の下で過ごす
-          <span className="text-good-blue-gold block">良い時間をあなたに</span>
-        </h1>
-        <p className="text-xl text-good-blue-brown/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-          九重・くじゅうの希少な山野草と出会える唯一のフラワーショップ。<br />
-          つつましくて上品な草花と、こだわりのカフェで特別な時間をお過ごしください。
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <button
-            onClick={() => onCategoryChange('seedlings')}
-            className="flex items-center justify-center space-x-2 bg-good-blue-gold text-white px-8 py-3 rounded-lg hover:bg-good-blue-gold/90 transition-all duration-200 hover:scale-105 shadow-md"
-          >
-            <Sprout className="h-5 w-5" />
-            <span>フラワーショップ</span>
-            <ArrowRight className="h-4 w-4" />
-          </button>
-          <button
-            onClick={() => onCategoryChange('coffee')}
-            className="flex items-center justify-center space-x-2 bg-white text-good-blue-gold border-2 border-good-blue-gold px-8 py-3 rounded-lg hover:bg-good-blue-gold hover:text-white transition-all duration-200 hover:scale-105 shadow-md"
-          >
-            <Coffee className="h-5 w-5" />
-            <span>カフェメニュー</span>
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const slides = [
+    {
+      image: '/images/hero/20240521-2-1024x682.jpg',
+      alt: 'GOOD BLUE 外観'
+    },
+    {
+      image: '/images/hero/20240521-122-1536x1024.jpg',
+      alt: 'お店の外観'
+    },
+    {
+      image: '/images/hero/20240521-154-1536x1024.jpg',
+      alt: '店内の様子'
+    },
+    {
+      image: '/images/hero/20240521-272-rendered-1536x1024.jpg',
+      alt: '花と緑に囲まれた空間'
+    },
+    {
+      image: '/images/hero/20240521-345-1536x1024.jpg',
+      alt: '自然豊かな環境'
+    }
+  ];
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="text-center">
-            <div className="bg-white rounded-full p-4 w-16 h-16 mx-auto mb-4 shadow-md">
-              <Sprout className="h-8 w-8 text-good-blue-gold" />
-            </div>
-            <h3 className="text-lg font-semibold text-good-blue-brown mb-2">季節の花々</h3>
-            <p className="text-good-blue-brown/70">九重の大自然で育った新鮮な花と観葉植物</p>
-          </div>
-          <div className="text-center">
-            <div className="bg-white rounded-full p-4 w-16 h-16 mx-auto mb-4 shadow-md">
-              <Coffee className="h-8 w-8 text-good-blue-gold" />
-            </div>
-            <h3 className="text-lg font-semibold text-good-blue-brown mb-2">こだわりのカフェ</h3>
-            <p className="text-good-blue-brown/70">厳選したコーヒー豆と手作りスイーツ</p>
-          </div>
-          <div className="text-center">
-            <div className="bg-white rounded-full p-4 w-16 h-16 mx-auto mb-4 shadow-md">
-              <ArrowRight className="h-8 w-8 text-good-blue-gold" />
-            </div>
-            <h3 className="text-lg font-semibold text-good-blue-brown mb-2">癒しの空間</h3>
-            <p className="text-good-blue-brown/70">くじゅうの自然に囲まれた特別な時間</p>
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000); // 5秒ごとに自動スライド
+
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  const goToPrevious = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const goToNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  return (
+    <div className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden">
+      {/* スライド画像 */}
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
+            index === currentSlide ? 'translate-x-0' : index < currentSlide ? '-translate-x-full' : 'translate-x-full'
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt={slide.alt}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+      ))}
+
+      {/* オーバーレイコンテンツ */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center text-white px-4 max-w-5xl mx-auto">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            青空の下で過ごす
+            <span className="text-good-blue-gold block mt-2">良い時間をあなたに</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
+            九重・くじゅうの希少な山野草と出会える唯一のフラワーショップ。<br />
+            つつましくて上品な草花と、こだわりのカフェで特別な時間を。
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => onCategoryChange('seedlings')}
+              className="flex items-center justify-center space-x-2 bg-good-blue-gold text-white px-8 py-3 rounded-lg hover:bg-good-blue-gold/90 transition-all duration-200 hover:scale-105 shadow-md backdrop-blur-sm bg-opacity-90"
+            >
+              <Sprout className="h-5 w-5" />
+              <span>花苗を見る</span>
+            </button>
+            <button
+              onClick={() => onCategoryChange('coffee')}
+              className="flex items-center justify-center space-x-2 bg-white/90 text-good-blue-gold border-2 border-good-blue-gold px-8 py-3 rounded-lg hover:bg-good-blue-gold hover:text-white transition-all duration-200 hover:scale-105 shadow-md backdrop-blur-sm"
+            >
+              <Coffee className="h-5 w-5" />
+              <span>カフェメニュー</span>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* 矢印ボタン */}
+      <button
+        onClick={goToPrevious}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors duration-200"
+        aria-label="前のスライド"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      <button
+        onClick={goToNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors duration-200"
+        aria-label="次のスライド"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
+
+      {/* インジケーター */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide
+                ? 'bg-white w-8'
+                : 'bg-white/50 hover:bg-white/70'
+            }`}
+            aria-label={`スライド ${index + 1}`}
+          />
+        ))}
+      </div>
+
     </div>
   );
 };

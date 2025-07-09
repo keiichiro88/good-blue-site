@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Cart from './components/Cart';
 import Toast from './components/Toast';
 import ProductDetail from './components/ProductDetail';
+import Checkout from './components/Checkout';
 import { Phone } from 'lucide-react';
 import { products } from './data/products';
 import { Product, FilterOptions, CartItem } from './types';
@@ -20,6 +21,7 @@ function App() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [toast, setToast] = useState({ show: false, message: '' });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [showCheckout, setShowCheckout] = useState(false);
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
@@ -67,8 +69,16 @@ function App() {
   };
 
   const handleCheckout = () => {
-    // TODO: チェックアウト処理の実装
-    alert('チェックアウト機能は開発中です');
+    setShowCheckout(true);
+    setCurrentCategory('checkout');
+  };
+
+  const handleOrderComplete = () => {
+    // 注文完了後の処理
+    setCart([]); // カートを空にする
+    setShowCheckout(false);
+    setCurrentCategory('all');
+    setToast({ show: true, message: 'ご注文ありがとうございました！' });
   };
 
   const handleProductClick = (product: Product) => {
@@ -91,8 +101,9 @@ function App() {
 
   const showHero = currentCategory === 'all' && !selectedProduct;
   const showProducts = ['all', 'seedlings', 'coffee', 'houseplants', 'fruit-trees', 'flowering-trees', 'single-origin', 'blends', 'organic'].includes(currentCategory) && !selectedProduct;
-  const showCart = currentCategory === 'cart';
+  const showCart = currentCategory === 'cart' && !showCheckout;
   const showProductDetail = selectedProduct !== null;
+  const showCheckoutPage = showCheckout && currentCategory === 'checkout';
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -151,6 +162,17 @@ function App() {
           onRemoveItem={handleRemoveItem}
           onContinueShopping={handleContinueShopping}
           onCheckout={handleCheckout}
+        />
+      )}
+
+      {showCheckoutPage && (
+        <Checkout
+          cartItems={cart}
+          onBack={() => {
+            setShowCheckout(false);
+            setCurrentCategory('cart');
+          }}
+          onOrderComplete={handleOrderComplete}
         />
       )}
 

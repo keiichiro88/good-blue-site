@@ -8,19 +8,30 @@ const AboutSection: React.FC = () => {
         {/* 店主からのメッセージ */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-good-blue-brown text-center mb-8">店主からのメッセージ</h2>
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-4xl mx-auto">
-            <p className="text-good-blue-brown/80 leading-relaxed mb-6">
-              九重町の大自然に魅了されて移住をし、2023年に、この地域に来た人が気軽に立ち寄っていただける花屋＆カフェ「goodblue」をOPENしました。
-            </p>
-            <p className="text-good-blue-brown/80 leading-relaxed mb-6">
-              当店は『青空の下で過ごす良い時間』をテーマにしています。花束や切り花ではなく花苗の販売をしています。お庭に植えた苗の成長を青空の下で感じて頂きたい。また翌年の同じ季節になると新芽を出し綺麗な花をその先何年も付けて、ずっと良い時間を過ごして頂きたい。そういう想いでお客様をお迎えしています。
-            </p>
-            <p className="text-good-blue-brown/80 leading-relaxed mb-6">
-              また敷地内にドッグランもあります。愛犬と一緒に青空の下で良い時間を過ごして下さい。店内のカフェスペースはワンちゃん歓迎です。ランの後や花を見ながら自然の環境に近い店内でのんびりとした時間を楽しんで頂けたら幸いです。
-            </p>
-            <p className="text-right text-good-blue-brown font-medium">
-              goodblue 店主　的場達郎
-            </p>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-4xl mx-auto">
+            <div className="md:flex">
+              <div className="md:w-1/3">
+                <img 
+                  src="/images/about/owner.jpg" 
+                  alt="店主 的場達郎" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-8 md:w-2/3">
+                <p className="text-good-blue-brown/80 leading-relaxed mb-6">
+                  九重町の大自然に魅了されて移住をし、2023年に、この地域に来た人が気軽に立ち寄っていただける花屋＆カフェ「goodblue」をOPENしました。
+                </p>
+                <p className="text-good-blue-brown/80 leading-relaxed mb-6">
+                  当店は『青空の下で過ごす良い時間』をテーマにしています。花束や切り花ではなく花苗の販売をしています。お庭に植えた苗の成長を青空の下で感じて頂きたい。また翌年の同じ季節になると新芽を出し綺麗な花をその先何年も付けて、ずっと良い時間を過ごして頂きたい。そういう想いでお客様をお迎えしています。
+                </p>
+                <p className="text-good-blue-brown/80 leading-relaxed mb-6">
+                  また敷地内にドッグランもあります。愛犬と一緒に青空の下で良い時間を過ごして下さい。店内のカフェスペースはワンちゃん歓迎です。ランの後や花を見ながら自然の環境に近い店内でのんびりとした時間を楽しんで頂けたら幸いです。
+                </p>
+                <p className="text-right text-good-blue-brown font-medium">
+                  goodblue 店主　的場達郎
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 

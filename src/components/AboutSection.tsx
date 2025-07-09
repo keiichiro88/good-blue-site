@@ -3,8 +3,16 @@ import { Flower2, Dog, Coffee, MapPin } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="py-16 bg-good-blue-light">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 bg-good-blue-light overflow-hidden">
+      {/* 右側に控えめな円形装飾 */}
+      <div className="absolute top-20 right-0 w-32 h-32 -mr-16">
+        <div className="w-full h-full rounded-full bg-good-blue-gold/5"></div>
+      </div>
+      {/* 左側に控えめな円形装飾 */}
+      <div className="absolute bottom-20 left-0 w-24 h-24 -ml-12">
+        <div className="w-full h-full rounded-full bg-good-blue-brown/5"></div>
+      </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* 店主からのメッセージ */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-good-blue-brown text-center mb-8">店主からのメッセージ</h2>

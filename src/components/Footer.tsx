@@ -3,8 +3,10 @@ import { MapPin, Phone, Clock, Mail, Instagram, Facebook, Twitter } from 'lucide
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-good-blue-brown text-good-blue-cream">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="relative bg-good-blue-brown text-good-blue-cream">
+      {/* 上部に控えめな波形装飾 */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-good-blue-gold/20 to-transparent"></div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* 店舗情報 */}
           <div>

@@ -7,8 +7,28 @@ interface HeroContentProps {
 
 const HeroContent: React.FC<HeroContentProps> = ({ onCategoryChange }) => {
   return (
-    <div className="bg-gradient-to-b from-good-blue-cream to-white py-16 px-4">
-      <div className="max-w-7xl mx-auto text-center">
+    <div className="relative bg-gradient-to-b from-good-blue-cream to-white py-16 px-4 overflow-hidden">
+      {/* 右上に小さな装飾 */}
+      <div className="absolute top-4 right-4 w-24 h-24 opacity-10">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path 
+            d="M40.7,-69.8C52.3,-62.5,60.9,-50.2,67.6,-36.8C74.3,-23.4,79.1,-8.9,78.7,5.7C78.3,20.3,72.7,35,63.1,46.9C53.5,58.8,40,67.9,24.8,73.2C9.7,78.5,-7.1,80,-23.1,76.3C-39.1,72.6,-54.3,63.7,-65.3,51.2C-76.3,38.7,-83.1,22.6,-84.5,5.8C-85.9,-11,-81.9,-28.5,-73.3,-43.3C-64.7,-58.1,-51.5,-70.2,-36.8,-75.8C-22.1,-81.4,-5.9,-80.5,8.8,-74.9C23.5,-69.3,29.1,-77.1,40.7,-69.8Z" 
+            transform="translate(100 100)" 
+            className="fill-good-blue-gold"
+          />
+        </svg>
+      </div>
+      {/* 左下に小さな装飾 */}
+      <div className="absolute bottom-4 left-4 w-20 h-20 opacity-10">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path 
+            d="M43.5,-76.7C55.8,-68.5,65,-55.7,71.8,-41.8C78.5,-27.9,82.8,-12.9,82.3,2.3C81.8,17.5,76.5,33.5,68.1,47.2C59.7,60.9,48.2,72.3,34.1,78.8C20,85.3,3.3,86.9,-13.5,84.4C-30.3,81.9,-47.2,75.3,-60.7,64.5C-74.2,53.7,-84.3,38.7,-88.6,21.8C-92.9,4.9,-91.4,-13.9,-85.3,-30.8C-79.2,-47.7,-68.5,-62.7,-54.5,-70C-40.5,-77.3,-23.2,-76.9,-7.2,-71.6C8.8,-66.3,31.2,-84.9,43.5,-76.7Z" 
+            transform="translate(100 100)" 
+            className="fill-good-blue-brown"
+          />
+        </svg>
+      </div>
+      <div className="relative max-w-7xl mx-auto text-center z-10">
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-good-blue-brown mb-6 leading-tight">
           青空の下で過ごす
           <span className="text-good-blue-gold block mt-2">良い時間をあなたに</span>

@@ -58,22 +58,25 @@ function App() {
       )}
 
       {showProducts && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row gap-8">
-            <div className="md:w-64 flex-shrink-0">
-              <FilterPanel
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-good-blue-cream/5 to-transparent pointer-events-none" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="md:w-64 flex-shrink-0">
+                <FilterPanel
+                  filters={filters}
+                  onFiltersChange={setFilters}
+                  isOpen={isFilterOpen}
+                  onToggle={() => setIsFilterOpen(!isFilterOpen)}
+                />
+              </div>
+              
+              <ProductGrid
+                products={products}
                 filters={filters}
-                onFiltersChange={setFilters}
-                isOpen={isFilterOpen}
-                onToggle={() => setIsFilterOpen(!isFilterOpen)}
+                onAddToCart={handleAddToCart}
               />
             </div>
-            
-            <ProductGrid
-              products={products}
-              filters={filters}
-              onAddToCart={handleAddToCart}
-            />
           </div>
         </div>
       )}

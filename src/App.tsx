@@ -8,6 +8,7 @@ import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
 import Toast from './components/Toast';
+import ProductDetail from './components/ProductDetail';
 import { Phone } from 'lucide-react';
 import { products } from './data/products';
 import { Product, FilterOptions, CartItem } from './types';
@@ -18,25 +19,27 @@ function App() {
   const [filters, setFilters] = useState<FilterOptions>({ category: 'all' });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [toast, setToast] = useState({ show: false, message: '' });
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
     setFilters({ 
       category: category === 'all' ? 'all' : category.includes('seedlings') || ['houseplants', 'fruit-trees', 'flowering-trees'].includes(category) ? 'seedlings' : category.includes('coffee') || ['single-origin', 'blends', 'organic'].includes(category) ? 'coffee' : 'all' 
     });
+    setSelectedProduct(null); // カテゴリー変更時に商品詳細を閉じる
   };
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: Product, quantity: number = 1) => {
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.product.id === product.id);
       if (existingItem) {
         return prevCart.map(item =>
           item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
-      return [...prevCart, { product, quantity: 1 }];
+      return [...prevCart, { product, quantity }];
     });
     setToast({ show: true, message: `${product.name}をカートに追加しました` });
   };
@@ -68,11 +71,28 @@ function App() {
     alert('チェックアウト機能は開発中です');
   };
 
+  const handleProductClick = (product: Product) => {
+    setSelectedProduct(product);
+    window.scrollTo(0, 0);
+  };
+
+  const handleGoBack = () => {
+    setSelectedProduct(null);
+  };
+
+  const getRelatedProducts = (product: Product) => {
+    // 同じカテゴリーの商品を関連商品として表示（現在の商品を除く）
+    return products
+      .filter(p => p.category === product.category && p.id !== product.id)
+      .slice(0, 4);
+  };
+
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
-  const showHero = currentCategory === 'all';
-  const showProducts = ['all', 'seedlings', 'coffee', 'houseplants', 'fruit-trees', 'flowering-trees', 'single-origin', 'blends', 'organic'].includes(currentCategory);
+  const showHero = currentCategory === 'all' && !selectedProduct;
+  const showProducts = ['all', 'seedlings', 'coffee', 'houseplants', 'fruit-trees', 'flowering-trees', 'single-origin', 'blends', 'organic'].includes(currentCategory) && !selectedProduct;
   const showCart = currentCategory === 'cart';
+  const showProductDetail = selectedProduct !== null;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -107,10 +127,21 @@ function App() {
                 products={products}
                 filters={filters}
                 onAddToCart={handleAddToCart}
+                onProductClick={handleProductClick}
               />
             </div>
           </div>
         </div>
+      )}
+
+      {showProductDetail && selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          onAddToCart={handleAddToCart}
+          onGoBack={handleGoBack}
+          relatedProducts={getRelatedProducts(selectedProduct)}
+          onProductClick={handleProductClick}
+        />
       )}
 
       {showCart && (

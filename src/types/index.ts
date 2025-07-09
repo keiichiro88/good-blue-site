@@ -11,6 +11,8 @@ export interface Product {
   roastLevel?: 'light' | 'medium' | 'dark';
   origin?: string;
   organic?: boolean;
+  bloom?: string; // 開花時期
+  sunlight?: string; // 日当たり
   inStock: boolean;
   rating: number;
   reviews: number;

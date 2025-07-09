@@ -7,9 +7,10 @@ interface ProductGridProps {
   products: Product[];
   filters: FilterOptions;
   onAddToCart: (product: Product) => void;
+  onProductClick?: (product: Product) => void;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCart }) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCart, onProductClick }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'rating'>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
@@ -144,6 +145,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
               key={product.id}
               product={product}
               onAddToCart={onAddToCart}
+              onProductClick={onProductClick}
             />
           ))}
         </div>

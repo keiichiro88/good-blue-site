@@ -5,9 +5,10 @@ import { Product } from '../types';
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
+  onProductClick?: (product: Product) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onProductClick }) => {
   const getDifficultyColor = (difficulty?: string) => {
     switch (difficulty) {
       case 'easy': return 'bg-green-50 text-green-700';
@@ -46,7 +47,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group border border-good-blue-gold/20 flex flex-col">
-      <div className="relative aspect-video">
+      <div 
+        className="relative aspect-video cursor-pointer"
+        onClick={() => onProductClick && onProductClick(product)}
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -64,7 +68,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       
       <div className="p-3 flex flex-col flex-grow">
         {/* Product name */}
-        <h3 className="text-sm font-semibold text-good-blue-brown mb-1.5 line-clamp-1">{product.name}</h3>
+        <h3 
+          className="text-sm font-semibold text-good-blue-brown mb-1.5 line-clamp-1 cursor-pointer hover:text-good-blue-gold transition-colors"
+          onClick={() => onProductClick && onProductClick(product)}
+        >
+          {product.name}
+        </h3>
         
         {/* Description */}
         <p className="text-xs text-good-blue-brown/70 mb-3 line-clamp-2 flex-grow">{product.description}</p>

@@ -56,9 +56,9 @@ const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
   };
 
   return (
-    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-100">
-      {/* スライド画像 */}
-      <div className="relative h-full">
+    <div className="relative w-full overflow-hidden bg-gray-100">
+      {/* スライド画像 - 元の比率3:2を維持 */}
+      <div className="relative w-full" style={{ paddingBottom: '66.67%' }}>
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -69,7 +69,7 @@ const Hero: React.FC<HeroProps> = ({ onCategoryChange }) => {
             <img
               src={slide.image}
               alt={slide.alt}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         ))}

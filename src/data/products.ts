@@ -11,6 +11,8 @@ export const products: Product[] = [
     image: '/images/products/20240521-121-1536x1024.jpg',
     description: '春に美しいピンクの花を咲かせる九重の山野草',
     difficulty: 'medium',
+    bloom: '4月〜5月',
+    sunlight: '半日陰',
     inStock: true,
     rating: 4.9,
     reviews: 23
@@ -24,6 +26,8 @@ export const products: Product[] = [
     image: '/images/products/20240521-80-1536x1024.jpg',
     description: '秋の七草のひとつ。深い青紫色の花が美しい',
     difficulty: 'easy',
+    bloom: '7月〜9月',
+    sunlight: '日向〜半日陰',
     inStock: true,
     rating: 4.8,
     reviews: 18

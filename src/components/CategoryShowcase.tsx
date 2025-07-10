@@ -63,8 +63,8 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
   };
 
   return (
-    <section className="section-padding bg-gray-50">
-      <div className="container-base">
+    <section className="section-padding bg-gray-50 py-20">
+      <div className="container-base max-w-6xl mx-auto">
         <motion.div
           ref={ref}
           initial="hidden"
@@ -80,7 +80,7 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
           </div>
 
           {/* カテゴリーグリッド */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 md:px-12">
             {categories.map((category, index) => (
               <motion.div
                 key={category.id}
@@ -89,8 +89,8 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
                 onClick={() => onCategoryChange(category.id)}
               >
                 <div className="bg-white rounded-lg overflow-hidden shadow-soft hover:shadow-large transition-all duration-300">
-                  {/* 画像部分 - 高さを増やしてより大きく表示 */}
-                  <div className="relative h-80 md:h-96 bg-gray-200 overflow-hidden">
+                  {/* 画像部分 - 高さを調整 */}
+                  <div className="relative h-64 md:h-72 bg-gray-200 overflow-hidden">
                     <img
                       src={category.image}
                       alt={category.title}
@@ -112,14 +112,14 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
                   </div>
 
                   {/* コンテンツ部分 - パディングとテキストサイズを調整 */}
-                  <div className="p-4 md:p-6">
-                    <h3 className="text-lg md:text-xl font-display font-semibold text-gray-900 mb-3 group-hover:text-good-blue-gold transition-colors">
+                  <div className="p-4 md:p-5">
+                    <h3 className="text-base md:text-lg font-display font-semibold text-gray-900 mb-2 group-hover:text-good-blue-gold transition-colors">
                       {category.title}
                     </h3>
-                    <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-xs md:text-sm text-gray-600 leading-relaxed mb-3 line-clamp-3">
                       {category.description}
                     </p>
-                    <button className="text-sm md:text-base text-good-blue-gold font-medium hover:text-good-blue-brown transition-colors inline-flex items-center gap-2">
+                    <button className="text-xs md:text-sm text-good-blue-gold font-medium hover:text-good-blue-brown transition-colors inline-flex items-center gap-2">
                       {category.buttonText}
                       <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </button>

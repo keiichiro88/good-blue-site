@@ -72,8 +72,8 @@ const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
   };
 
   return (
-    <section className="section-padding bg-good-blue-light seasonal-section">
-      <div className="container-base">
+    <section className="py-24 bg-white seasonal-section">
+      <div className="container-base max-w-7xl mx-auto">
         <motion.div
           ref={ref}
           initial="hidden"
@@ -81,51 +81,27 @@ const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
           variants={containerVariants}
         >
           {/* セクションヘッダー */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Calendar className="h-6 w-6 text-good-blue-gold" />
-              <h2 className="heading-secondary text-good-blue-brown">
-                7月のおすすめ
-              </h2>
-              <Sparkles className="h-6 w-6 text-good-blue-gold" />
-            </div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              夏本番！暑さに強い植物や、爽やかな夏のコーヒーをご紹介します
-            </p>
+          <div className="text-left mb-16">
+            <h2 className="text-2xl md:text-3xl font-display font-medium text-gray-800 mb-3">
+              Recommended おすすめ商品
+            </h2>
           </div>
 
           {/* おすすめ商品グリッド */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-8">
             {seasonalProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 variants={itemVariants}
-                className="relative"
               >
-                {/* バッジ */}
-                <div className="absolute -top-3 left-4 z-10">
-                  <span className="bg-good-blue-gold text-white px-3 py-1 rounded-full text-xs font-medium shadow-md">
-                    {product.badge}
-                  </span>
-                </div>
-                
                 {/* 商品カード */}
-                <div className="pt-2">
-                  <NewProductCard
-                    product={product}
-                    onAddToCart={onAddToCart}
-                    onProductClick={onProductClick}
-                    onToggleFavorite={onToggleFavorite}
-                    isFavorite={isFavorite(product.id)}
-                  />
-                </div>
-                
-                {/* おすすめ理由 */}
-                <div className="mt-3 p-3 bg-white rounded-lg shadow-soft">
-                  <p className="text-sm text-gray-600">
-                    {product.reason}
-                  </p>
-                </div>
+                <NewProductCard
+                  product={product}
+                  onAddToCart={onAddToCart}
+                  onProductClick={onProductClick}
+                  onToggleFavorite={onToggleFavorite}
+                  isFavorite={isFavorite(product.id)}
+                />
               </motion.div>
             ))}
           </div>
@@ -133,68 +109,60 @@ const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
           {/* 特別企画バナー - 店主からのメッセージ風 */}
           <motion.div
             variants={itemVariants}
-            className="mb-16"
+            className="mt-24 px-4 md:px-8"
           >
-            <h3 className="text-2xl font-bold text-good-blue-brown text-center mb-8">店主おすすめ！夏の特別セット</h3>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-6xl mx-auto">
-              <div className="md:flex">
-                <div className="md:w-2/5">
-                  <div className="relative h-full min-h-[300px]">
-                    <img 
-                      src="/images/products/20240521-224-768x512.jpg" 
-                      alt="夏の特別セット" 
-                      className="w-full h-full object-cover"
-                    />
-                    {/* 期間限定バッジ */}
-                    <div className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                      期間限定
-                    </div>
+            <h3 className="text-xl font-medium text-gray-800 mb-12">店主おすすめ！夏の特別セット</h3>
+            <div className="bg-white max-w-4xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12">
+                {/* 左側：画像 */}
+                <div className="relative">
+                  <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded text-sm font-medium z-10">
+                    期間限定
                   </div>
+                  <img 
+                    src="/images/products/20240521-224-768x512.jpg" 
+                    alt="夏の特別セット" 
+                    className="w-full h-auto rounded-lg"
+                  />
                 </div>
-                <div className="p-8 md:w-3/5 bg-gradient-to-br from-good-blue-light/30 to-white">
-                  <h4 className="text-xl md:text-2xl font-display font-bold text-good-blue-brown mb-4">
+                
+                {/* 右側：テキスト */}
+                <div className="flex flex-col justify-center">
+                  <h4 className="text-2xl font-display font-medium text-gray-900 mb-6">
                     夏の特別セット販売中
                   </h4>
-                  <p className="text-good-blue-brown/80 leading-relaxed mb-4">
-                    こんにちは、店主の的場です。<br />
+                  
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                    こんにちは、店主の的場です。
+                  </p>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
                     この夏、特におすすめしたい植物を厳選してセットにしました。九重の涼しい環境で育った夏の植物は、暑さに強く、初心者の方でも育てやすいのが特徴です。
                   </p>
-                  <p className="text-good-blue-brown/80 leading-relaxed mb-6">
-                    セット内容：人気の夏植物3点 + オリジナル培養土<br />
-                    通常価格¥7,500のところ、期間限定で<span className="font-bold text-good-blue-gold">¥5,980（20%OFF）</span>でご提供いたします。
-                  </p>
                   
-                  {/* 特典 */}
-                  <div className="bg-white/80 rounded-lg p-4 mb-6">
-                    <p className="font-medium text-good-blue-brown mb-2">セット購入特典：</p>
-                    <ul className="text-sm text-good-blue-brown/80 space-y-1">
-                      <li>✓ 送料無料でお届け（通常¥600〜）</li>
-                      <li>✓ 私が作成した育て方ガイドブック付き</li>
-                      <li>✓ 30日間の枯れ保証付き</li>
+                  <div className="mb-6">
+                    <p className="text-sm text-gray-700 font-medium mb-2">セット内容特典：</p>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>・送料無料でお届け（通常¥600〜）</li>
+                      <li>・私が作成した育て方ガイドブック付き</li>
+                      <li>・30日間の枯れ保証付き</li>
                     </ul>
                   </div>
                   
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-sm text-gray-600 line-through">¥7,500</span>
-                      <span className="text-3xl font-bold text-good-blue-gold">¥5,980</span>
-                      <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                  <div className="border-t pt-6">
+                    <div className="flex items-baseline gap-3 mb-4">
+                      <span className="text-sm text-gray-500 line-through">¥7,500</span>
+                      <span className="text-2xl font-bold text-gray-900">¥5,980</span>
+                      <span className="bg-red-500 text-white px-2 py-1 rounded text-xs">
                         20%OFF
                       </span>
                     </div>
-                    <div className="text-right">
-                      <button className="bg-good-blue-gold text-white px-8 py-3 rounded-lg font-medium hover:bg-good-blue-brown transition-colors shadow-md mb-2">
-                        詳細を見る
-                      </button>
-                      <p className="text-sm text-red-600 font-medium">
-                        残り5セット限り
-                      </p>
-                    </div>
+                    <button className="w-full bg-gray-900 text-white py-3 rounded font-medium hover:bg-gray-800 transition-colors mb-2">
+                      詳細を見る
+                    </button>
+                    <p className="text-xs text-gray-500 text-center">
+                      残り5セット限り
+                    </p>
                   </div>
-                  
-                  <p className="text-right text-good-blue-brown/60 text-sm mt-4">
-                    goodblue 店主　的場達郎
-                  </p>
                 </div>
               </div>
             </div>

@@ -16,6 +16,9 @@ import Checkout from './components/Checkout';
 import SearchResults from './components/SearchResults';
 import Favorites from './components/Favorites';
 import InventoryManagement from './components/InventoryManagement';
+import CoffeeCategoryPage from './components/CoffeeCategoryPage';
+import SeedlingsCategoryPage from './components/SeedlingsCategoryPage';
+import OnlineStorePage from './components/OnlineStorePage';
 import { Phone } from 'lucide-react';
 import { products as initialProducts } from './data/products';
 import { reviews as initialReviews } from './data/reviews';
@@ -207,13 +210,16 @@ function App() {
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const showHero = currentCategory === 'all' && !selectedProduct;
-  const showProducts = ['all', 'seedlings', 'coffee', 'houseplants', 'fruit-trees', 'flowering-trees', 'single-origin', 'blends', 'organic'].includes(currentCategory) && !selectedProduct;
+  const showProducts = ['all', 'houseplants', 'fruit-trees', 'flowering-trees', 'single-origin', 'blends', 'organic'].includes(currentCategory) && !selectedProduct;
   const showCart = currentCategory === 'cart' && !showCheckout;
   const showProductDetail = selectedProduct !== null;
   const showCheckoutPage = showCheckout && currentCategory === 'checkout';
   const showSearchResults = currentCategory === 'search' && !selectedProduct;
   const showFavorites = currentCategory === 'favorites' && !selectedProduct;
   const showInventory = currentCategory === 'inventory' && !selectedProduct;
+  const showCoffeeCategory = currentCategory === 'coffee' && !selectedProduct;
+  const showSeedlingsCategory = currentCategory === 'seedlings' && !selectedProduct;
+  const showOnlineStore = currentCategory === 'store' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -333,43 +339,100 @@ function App() {
         />
       )}
 
+      {showCoffeeCategory && (
+        <CoffeeCategoryPage
+          products={products}
+          filters={filters}
+          onFiltersChange={setFilters}
+          isFilterOpen={isFilterOpen}
+          onToggleFilter={() => setIsFilterOpen(!isFilterOpen)}
+          onAddToCart={handleAddToCart}
+          onProductClick={handleProductClick}
+          onToggleFavorite={handleToggleFavorite}
+          isFavorite={isFavorite}
+        />
+      )}
+
+      {showSeedlingsCategory && (
+        <SeedlingsCategoryPage
+          products={products}
+          filters={filters}
+          onFiltersChange={setFilters}
+          isFilterOpen={isFilterOpen}
+          onToggleFilter={() => setIsFilterOpen(!isFilterOpen)}
+          onAddToCart={handleAddToCart}
+          onProductClick={handleProductClick}
+          onToggleFavorite={handleToggleFavorite}
+          isFavorite={isFavorite}
+        />
+      )}
+
+      {showOnlineStore && (
+        <OnlineStorePage
+          onCategoryChange={handleCategoryChange}
+        />
+      )}
+
       {currentCategory === 'guide' && (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-good-blue-brown mb-8 text-center">アクセス</h2>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <h2 className="text-3xl font-bold text-good-blue-brown mb-8 text-center">店舗情報・アクセス</h2>
           
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold text-good-blue-brown mb-4">店舗情報</h3>
-                <p className="text-good-blue-brown/80 mb-4">
-                  花とカフェ goodblue (グッドブルー）<br />
-                  〒879-4911<br />
-                  大分県玖珠郡九重町田野1672-18<br />
-                  TEL: 090-3013-7032
-                </p>
-                <p className="text-sm text-good-blue-brown/60">
-                  ※お食事処「くじゅう野の花の郷」に隣接
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-semibold text-good-blue-brown mb-4">営業時間</h3>
-                <p className="text-good-blue-brown/80 mb-4">
-                  10:00 - 16:00<br />
-                  店休日：不定休
-                </p>
-                <p className="text-sm text-good-blue-brown/60">
-                  ※季節や天候により営業時間が変更になる場合がございます。<br />
-                  お越しの際は事前にお電話でご確認ください。
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* 左側：店舗情報 */}
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-good-blue-brown mb-4">店舗情報</h3>
+                  <p className="text-good-blue-brown/80 mb-4">
+                    花とカフェ goodblue (グッドブルー）<br />
+                    〒879-4911<br />
+                    大分県玖珠郡九重町田野1672-18<br />
+                    TEL: 090-3013-7032
+                  </p>
+                  <p className="text-sm text-good-blue-brown/60">
+                    ※お食事処「くじゅう野の花の郷」に隣接
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-semibold text-good-blue-brown mb-4">営業時間</h3>
+                  <p className="text-good-blue-brown/80 mb-4">
+                    10:00 - 16:00<br />
+                    店休日：不定休
+                  </p>
+                  <p className="text-sm text-good-blue-brown/60">
+                    ※季節や天候により営業時間が変更になる場合がございます。<br />
+                    お越しの際は事前にお電話でご確認ください。
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-semibold text-good-blue-brown mb-4">交通アクセス</h3>
+                  <p className="text-good-blue-brown/80">
+                    九重の大自然に囲まれた素晴らしい環境でお待ちしております。<br />
+                    お車でお越しの際は、「くじゅう野の花の郷」を目印にお越しください。
+                  </p>
+                </div>
               </div>
             </div>
             
-            <div className="mt-8 pt-8 border-t border-good-blue-gold/20">
-              <h3 className="text-xl font-semibold text-good-blue-brown mb-4">交通アクセス</h3>
-              <p className="text-good-blue-brown/80">
-                九重の大自然に囲まれた素晴らしい環境でお待ちしております。<br />
-                お車でお越しの際は、「くじゅう野の花の郷」を目印にお越しください。
+            {/* 右側：Google Map */}
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <h3 className="text-xl font-semibold text-good-blue-brown mb-4">地図</h3>
+              <div className="w-full h-96 rounded-lg overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3340.3592442902745!2d131.22118!3d33.15219439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35414b9342675cbd%3A0x867229b41315d3f3!2z6Iqx44Go44Kr44OV44KnIGdvb2QgYmx1Ze-8iOOCsOODg-ODieODluODq-ODvO-8iQ!5e0!3m2!1sja!2sjp!4v1752116557388!5m2!1sja!2sjp"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="花とカフェ goodblue (グッドブルー）の地図"
+                ></iframe>
+              </div>
+              <p className="text-sm text-good-blue-brown/60 mt-4">
+                ※地図をクリックすると、Google Mapsが開きます
               </p>
             </div>
           </div>

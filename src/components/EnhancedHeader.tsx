@@ -171,92 +171,80 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
           {/* 下段：カテゴリーナビゲーション */}
           <nav className="hidden md:block">
             <div className="flex items-center justify-center space-x-8 py-3">
-              <button
-                onClick={() => onCategoryChange('all')}
-                className="text-gray-700 hover:text-good-blue-gold font-medium transition-colors"
-              >
-                オンラインストア
-              </button>
-
-              {/* コーヒー ドロップダウン */}
+              {/* オンラインストア ドロップダウン */}
               <div 
                 className="relative"
-                onMouseEnter={() => setActiveDropdown('coffee')}
+                onMouseEnter={() => setActiveDropdown('store')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button
-                  onClick={() => onCategoryChange('coffee')}
+                  onClick={() => onCategoryChange('store')}
                   className="flex items-center space-x-1 text-gray-700 hover:text-good-blue-gold font-medium transition-colors"
                 >
-                  <span>コーヒーについて</span>
+                  <span>オンラインストア</span>
                   <ChevronDown className="h-4 w-4" />
                 </button>
                 
                 <AnimatePresence>
-                  {activeDropdown === 'coffee' && (
+                  {activeDropdown === 'store' && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-large py-2 z-50"
+                      className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-large py-2 z-50"
                     >
-                      <div className="px-4 py-2 border-b border-gray-100">
-                        <p className="text-sm font-semibold text-gray-700">コーヒー商品</p>
+                      <div className="grid grid-cols-2 gap-4 p-4">
+                        {/* コーヒーカテゴリー */}
+                        <div>
+                          <h3 className="font-semibold text-gray-700 mb-3 pb-2 border-b border-gray-200">コーヒー</h3>
+                          <div className="space-y-2">
+                            {categories.coffee.subcategories.map((sub) => (
+                              <button
+                                key={sub.id}
+                                onClick={() => {
+                                  onCategoryChange(sub.id);
+                                  setActiveDropdown(null);
+                                }}
+                                className="block w-full text-left text-sm text-gray-600 hover:text-good-blue-gold hover:bg-gray-50 px-2 py-1 rounded transition-colors"
+                              >
+                                {sub.name}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        {/* 花苗・植物カテゴリー */}
+                        <div>
+                          <h3 className="font-semibold text-gray-700 mb-3 pb-2 border-b border-gray-200">花苗・植物</h3>
+                          <div className="space-y-2">
+                            {categories.seedlings.subcategories.map((sub) => (
+                              <button
+                                key={sub.id}
+                                onClick={() => {
+                                  onCategoryChange(sub.id);
+                                  setActiveDropdown(null);
+                                }}
+                                className="block w-full text-left text-sm text-gray-600 hover:text-good-blue-gold hover:bg-gray-50 px-2 py-1 rounded transition-colors"
+                              >
+                                {sub.name}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                      {categories.coffee.subcategories.map((sub) => (
+                      
+                      {/* 全商品を見るボタン */}
+                      <div className="border-t border-gray-100 px-4 pt-3 pb-2">
                         <button
-                          key={sub.id}
                           onClick={() => {
-                            onCategoryChange(sub.id);
+                            onCategoryChange('all');
                             setActiveDropdown(null);
                           }}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:text-good-blue-gold hover:bg-gray-50 transition-colors"
+                          className="w-full text-center text-sm text-good-blue-gold hover:text-good-blue-brown font-medium transition-colors"
                         >
-                          {sub.name}
+                          すべての商品を見る →
                         </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* 花苗・植物 ドロップダウン */}
-              <div 
-                className="relative"
-                onMouseEnter={() => setActiveDropdown('seedlings')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button
-                  onClick={() => onCategoryChange('seedlings')}
-                  className="flex items-center space-x-1 text-gray-700 hover:text-good-blue-gold font-medium transition-colors"
-                >
-                  <span>花苗・植物</span>
-                  <ChevronDown className="h-4 w-4" />
-                </button>
-                
-                <AnimatePresence>
-                  {activeDropdown === 'seedlings' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-large py-2 z-50"
-                    >
-                      <div className="px-4 py-2 border-b border-gray-100">
-                        <p className="text-sm font-semibold text-gray-700">植物カテゴリー</p>
                       </div>
-                      {categories.seedlings.subcategories.map((sub) => (
-                        <button
-                          key={sub.id}
-                          onClick={() => {
-                            onCategoryChange(sub.id);
-                            setActiveDropdown(null);
-                          }}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:text-good-blue-gold hover:bg-gray-50 transition-colors"
-                        >
-                          {sub.name}
-                        </button>
-                      ))}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -303,7 +291,7 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
               <nav className="container-base py-4 space-y-2">
                 <button
                   onClick={() => {
-                    onCategoryChange('all');
+                    onCategoryChange('store');
                     setIsMenuOpen(false);
                   }}
                   className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"

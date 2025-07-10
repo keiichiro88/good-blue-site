@@ -16,29 +16,29 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({ onCategoryChange }) => 
   const features = [
     {
       icon: Flower2,
-      title: '厳選された花苗',
-      description: '地元大分で丁寧に育てられた、健康で美しい花苗を取り揃えています',
+      title: 'ちいさな芽から、大きな喜びへ',
+      description: '「あ、今日も新しい葉っぱが！」そんな小さな発見が、毎朝の楽しみになります。九重の風を感じながら育った花苗たちが、あなたの日常に優しい変化をお届けします。',
       action: () => onCategoryChange('seedlings'),
       color: 'text-green-600'
     },
     {
       icon: Coffee,
-      title: 'こだわりのカフェ',
-      description: '厳選されたコーヒー豆と手作りスイーツで、至福のひとときを',
+      title: '今日もおつかれさま、の一杯',
+      description: '朝の目覚めに、午後のひとやすみに。goodblueのコーヒーは、あなたの「ほっ」とする瞬間に寄り添います。豆の香りに包まれて、ゆっくり深呼吸してみませんか。',
       action: () => onCategoryChange('coffee'),
       color: 'text-good-blue-brown'
     },
     {
       icon: Heart,
-      title: '心を込めたサービス',
-      description: 'お客様一人ひとりに寄り添い、最適なご提案をいたします',
+      title: 'はじめてでも、だいじょうぶ',
+      description: '「この子、うちで育つかな？」そんな不安も一緒に受け止めます。育て方のコツから季節のお手入れまで、まるで隣にいるようにサポート。あなたの「育てたい」気持ちを応援します。',
       action: () => onCategoryChange('guide'),
       color: 'text-red-500'
     },
     {
       icon: Truck,
-      title: '安心の配送',
-      description: '大切な商品を、確実にお届けします。配送料計算も簡単です',
+      title: '九重から、まごころ便',
+      description: '一つひとつ丁寧に、「元気に育ってね」の願いを込めて梱包しています。箱を開けた瞬間、九重の爽やかな風を感じていただけるよう、新鮮な状態でお届けします。',
       action: () => onCategoryChange('all'),
       color: 'text-blue-600'
     }
@@ -77,11 +77,12 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({ onCategoryChange }) => 
         >
           <div className="text-center mb-12">
             <h2 className="heading-secondary text-good-blue-brown mb-4">
-              GOOD BLUEの特徴
+              あなたの毎日に、小さな幸せを
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              私たちは、花と緑、そして美味しいコーヒーを通じて
-              お客様の日常に彩りと安らぎをお届けします
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              植物を育てること、美味しいコーヒーを飲むこと。<br className="hidden md:inline" />
+              それは特別なことじゃなくて、毎日のちょっとした楽しみ。<br className="hidden md:inline" />
+              goodblueは、そんな「いつもの幸せ」をお手伝いします。
             </p>
           </div>
 

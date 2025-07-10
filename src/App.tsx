@@ -19,6 +19,7 @@ import InventoryManagement from './components/InventoryManagement';
 import CoffeeCategoryPage from './components/CoffeeCategoryPage';
 import SeedlingsCategoryPage from './components/SeedlingsCategoryPage';
 import OnlineStorePage from './components/OnlineStorePage';
+import CareGuidePage from './components/CareGuidePage';
 import { Phone } from 'lucide-react';
 import { products as initialProducts } from './data/products';
 import { reviews as initialReviews } from './data/reviews';
@@ -220,6 +221,8 @@ function App() {
   const showCoffeeCategory = currentCategory === 'coffee' && !selectedProduct;
   const showSeedlingsCategory = currentCategory === 'seedlings' && !selectedProduct;
   const showOnlineStore = currentCategory === 'store' && !selectedProduct;
+  const showCareGuide = currentCategory === 'care' && !selectedProduct;
+  const showContact = currentCategory === 'contact' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -350,6 +353,7 @@ function App() {
           onProductClick={handleProductClick}
           onToggleFavorite={handleToggleFavorite}
           isFavorite={isFavorite}
+          onCategoryChange={handleCategoryChange}
         />
       )}
 
@@ -364,6 +368,7 @@ function App() {
           onProductClick={handleProductClick}
           onToggleFavorite={handleToggleFavorite}
           isFavorite={isFavorite}
+          onCategoryChange={handleCategoryChange}
         />
       )}
 
@@ -439,7 +444,13 @@ function App() {
         </div>
       )}
 
-      {currentCategory === 'care' && (
+      {showCareGuide && (
+        <CareGuidePage
+          onCategoryChange={handleCategoryChange}
+        />
+      )}
+
+      {showContact && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <h2 className="text-3xl font-bold text-good-blue-brown mb-8 text-center">お問い合わせ</h2>
           <div className="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto">

@@ -16,6 +16,8 @@ export interface Product {
   inStock: boolean;
   rating: number;
   reviews: number;
+  tags?: Array<'new' | 'sale' | 'limited' | 'recommended' | 'free-shipping' | 'popular' | 'organic'>;
+  discount?: number; // 割引率（%）
 }
 
 export interface CartItem {

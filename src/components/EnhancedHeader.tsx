@@ -191,58 +191,29 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-large py-2 z-50"
+                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-large py-2 z-50"
                     >
-                      <div className="grid grid-cols-2 gap-4 p-4">
-                        {/* コーヒーカテゴリー */}
-                        <div>
-                          <h3 className="font-semibold text-gray-700 mb-3 pb-2 border-b border-gray-200">コーヒー</h3>
-                          <div className="space-y-2">
-                            {categories.coffee.subcategories.map((sub) => (
-                              <button
-                                key={sub.id}
-                                onClick={() => {
-                                  onCategoryChange(sub.id);
-                                  setActiveDropdown(null);
-                                }}
-                                className="block w-full text-left text-sm text-gray-600 hover:text-good-blue-gold hover:bg-gray-50 px-2 py-1 rounded transition-colors"
-                              >
-                                {sub.name}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        {/* 花苗・植物カテゴリー */}
-                        <div>
-                          <h3 className="font-semibold text-gray-700 mb-3 pb-2 border-b border-gray-200">花苗・植物</h3>
-                          <div className="space-y-2">
-                            {categories.seedlings.subcategories.map((sub) => (
-                              <button
-                                key={sub.id}
-                                onClick={() => {
-                                  onCategoryChange(sub.id);
-                                  setActiveDropdown(null);
-                                }}
-                                className="block w-full text-left text-sm text-gray-600 hover:text-good-blue-gold hover:bg-gray-50 px-2 py-1 rounded transition-colors"
-                              >
-                                {sub.name}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* 全商品を見るボタン */}
-                      <div className="border-t border-gray-100 px-4 pt-3 pb-2">
+                      <div className="p-4">
                         <button
                           onClick={() => {
-                            onCategoryChange('all');
+                            onCategoryChange('coffee');
                             setActiveDropdown(null);
                           }}
-                          className="w-full text-center text-sm text-good-blue-gold hover:text-good-blue-brown font-medium transition-colors"
+                          className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors mb-2"
                         >
-                          すべての商品を見る →
+                          <div className="font-medium mb-1">コーヒー</div>
+                          <div className="text-sm text-gray-500">ドリップバッグ、豆、ギフトセット</div>
+                        </button>
+                        
+                        <button
+                          onClick={() => {
+                            onCategoryChange('seedlings');
+                            setActiveDropdown(null);
+                          }}
+                          className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                        >
+                          <div className="font-medium mb-1">花苗・植物</div>
+                          <div className="text-sm text-gray-500">観葉植物、花木、季節の苗</div>
                         </button>
                       </div>
                     </motion.div>

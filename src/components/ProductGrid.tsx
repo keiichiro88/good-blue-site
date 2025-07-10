@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Grid, List, SortAsc } from 'lucide-react';
 import NewProductCard from './NewProductCard';
 import ProductListView from './ProductListView';
@@ -17,6 +17,18 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'rating'>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const filteredProducts = useMemo(() => {
     let filtered = products;
@@ -107,28 +119,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
           </div>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => setViewMode('grid')}
-            className={`p-2 rounded-md transition-colors duration-200 ${
-              viewMode === 'grid' 
-                ? 'bg-good-blue-gold text-white' 
-                : 'text-gray-600 hover:text-good-blue-brown'
-            }`}
-          >
-            <Grid className="h-4 w-4" />
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className={`p-2 rounded-md transition-colors duration-200 ${
-              viewMode === 'list' 
-                ? 'bg-good-blue-gold text-white' 
-                : 'text-gray-600 hover:text-good-blue-brown'
-            }`}
-          >
-            <List className="h-4 w-4" />
-          </button>
-        </div>
       </div>
 
       {/* Products */}
@@ -139,13 +129,13 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
         </div>
       ) : (
         <div className={`${
-          viewMode === 'grid' 
-            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6' 
-            : 'space-y-4'
+          isMobile
+            ? 'space-y-4' 
+            : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
         }`}>
           {filteredProducts.map(product => (
-            viewMode === 'grid' ? (
-              <NewProductCard
+            isMobile ? (
+              <ProductListView
                 key={product.id}
                 product={product}
                 onAddToCart={onAddToCart}
@@ -154,7 +144,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
                 isFavorite={isFavorite ? isFavorite(product.id) : false}
               />
             ) : (
-              <ProductListView
+              <NewProductCard
                 key={product.id}
                 product={product}
                 onAddToCart={onAddToCart}

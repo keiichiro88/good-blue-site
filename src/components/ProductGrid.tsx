@@ -92,7 +92,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
   return (
     <div className="flex-1">
       {/* Controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white p-4 rounded-lg shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4 mb-6 bg-white p-2 sm:p-4 rounded-lg shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
           <span className="text-sm text-gray-600 whitespace-nowrap">
             {filteredProducts.length}件の商品
@@ -107,7 +107,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
                 setSortBy(field as 'name' | 'price' | 'rating');
                 setSortOrder(order as 'asc' | 'desc');
               }}
-              className="text-sm border border-gray-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-good-blue-gold focus:border-transparent w-full sm:w-auto"
+              className="text-xs sm:text-sm border border-gray-300 rounded-md px-2 py-0.5 sm:px-3 sm:py-1.5 focus:ring-2 focus:ring-good-blue-gold focus:border-transparent w-full sm:w-auto"
             >
               <option value="name-asc">名前順（あ-ん）</option>
               <option value="name-desc">名前順（ん-あ）</option>

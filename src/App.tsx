@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EnhancedHeader from './components/EnhancedHeader';
 import ResponsiveHero from './components/ResponsiveHero';
 import FeatureSection from './components/FeatureSection';
@@ -20,31 +20,125 @@ import CoffeeCategoryPage from './components/CoffeeCategoryPage';
 import SeedlingsCategoryPage from './components/SeedlingsCategoryPage';
 import OnlineStorePage from './components/OnlineStorePage';
 import CareGuidePage from './components/CareGuidePage';
+import ComingSoonPage from './components/ComingSoonPage';
+import LegalNoticePage from './components/LegalNoticePage';
 import { Phone } from 'lucide-react';
 import { products as initialProducts } from './data/products';
 import { reviews as initialReviews } from './data/reviews';
 import { Product, FilterOptions, CartItem, Review } from './types';
 
 function App() {
-  const [currentCategory, setCurrentCategory] = useState<string>('all');
-  const [cart, setCart] = useState<CartItem[]>([]);
+  // URLハッシュから初期カテゴリーを取得
+  const getInitialCategory = () => {
+    const hash = window.location.hash.slice(1); // #を除去
+    return hash || 'all';
+  };
+
+  const [currentCategory, setCurrentCategory] = useState<string>(getInitialCategory());
+  
+  // ローカルストレージからカートを復元
+  const getInitialCart = (): CartItem[] => {
+    try {
+      const savedCart = localStorage.getItem('goodblue-cart');
+      if (savedCart) {
+        return JSON.parse(savedCart);
+      }
+    } catch (error) {
+      console.error('カートの復元に失敗しました:', error);
+    }
+    return [];
+  };
+
+  // ローカルストレージからお気に入りを復元
+  const getInitialFavorites = (): Product[] => {
+    try {
+      const savedFavorites = localStorage.getItem('goodblue-favorites');
+      if (savedFavorites) {
+        return JSON.parse(savedFavorites);
+      }
+    } catch (error) {
+      console.error('お気に入りの復元に失敗しました:', error);
+    }
+    return [];
+  };
+
+  const [cart, setCart] = useState<CartItem[]>(getInitialCart());
   const [filters, setFilters] = useState<FilterOptions>({ category: 'all' });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [toast, setToast] = useState({ show: false, message: '' });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showCheckout, setShowCheckout] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [favorites, setFavorites] = useState<Product[]>([]);
+  const [favorites, setFavorites] = useState<Product[]>(getInitialFavorites());
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [comingSoonPage, setComingSoonPage] = useState<string | null>(null);
+
+  // URLハッシュが変更された時の処理
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash && hash !== currentCategory) {
+        handleCategoryChange(hash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [currentCategory]);
+
+  // カテゴリーが変更された時にURLハッシュを更新
+  useEffect(() => {
+    if (currentCategory !== 'all') {
+      window.location.hash = currentCategory;
+    } else {
+      // ホームページの場合はハッシュを削除
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+  }, [currentCategory]);
+
+  // カートが変更された時にローカルストレージに保存
+  useEffect(() => {
+    try {
+      localStorage.setItem('goodblue-cart', JSON.stringify(cart));
+    } catch (error) {
+      console.error('カートの保存に失敗しました:', error);
+    }
+  }, [cart]);
+
+  // お気に入りが変更された時にローカルストレージに保存
+  useEffect(() => {
+    try {
+      localStorage.setItem('goodblue-favorites', JSON.stringify(favorites));
+    } catch (error) {
+      console.error('お気に入りの保存に失敗しました:', error);
+    }
+  }, [favorites]);
 
   const handleCategoryChange = (category: string) => {
+    // 準備中ページの処理
+    if (['blog', 'interview', 'wholesale'].includes(category)) {
+      const pageNames: Record<string, string> = {
+        'blog': 'ブログ',
+        'interview': 'インタビュー',
+        'wholesale': '業務用卸売販売'
+      };
+      setComingSoonPage(pageNames[category]);
+      return;
+    }
+    
     setCurrentCategory(category);
     setFilters({ 
       category: category === 'all' ? 'all' : category.includes('seedlings') || ['houseplants', 'fruit-trees', 'flowering-trees'].includes(category) ? 'seedlings' : category.includes('coffee') || ['single-origin', 'blends', 'organic'].includes(category) ? 'coffee' : 'all' 
     });
     setSelectedProduct(null); // カテゴリー変更時に商品詳細を閉じる
     setSearchQuery(''); // カテゴリー変更時に検索をクリア
+    setComingSoonPage(null); // 準備中ページをリセット
     
     // 特定のページに遷移時は上部にスクロール
     if (category === 'cart' || category === 'checkout' || category === 'favorites' || category === 'inventory' || 
@@ -223,6 +317,7 @@ function App() {
   const showOnlineStore = currentCategory === 'store' && !selectedProduct;
   const showCareGuide = currentCategory === 'care' && !selectedProduct;
   const showContact = currentCategory === 'contact' && !selectedProduct;
+  const showLegalNotice = currentCategory === 'legal' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -233,7 +328,17 @@ function App() {
         favoritesCount={favorites.length}
       />
       
-      {showHero && (
+      {comingSoonPage && (
+        <ComingSoonPage
+          pageName={comingSoonPage}
+          onGoBack={() => {
+            setComingSoonPage(null);
+            handleCategoryChange('all');
+          }}
+        />
+      )}
+      
+      {!comingSoonPage && showHero && (
         <>
           <ResponsiveHero onCategoryChange={handleCategoryChange} />
           <CategoryShowcase onCategoryChange={handleCategoryChange} />
@@ -249,7 +354,7 @@ function App() {
         </>
       )}
 
-      {showProducts && (
+      {!comingSoonPage && showProducts && (
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-good-blue-cream/5 to-transparent pointer-events-none" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -276,7 +381,7 @@ function App() {
         </div>
       )}
 
-      {showProductDetail && selectedProduct && (
+      {!comingSoonPage && showProductDetail && selectedProduct && (
         <NewProductDetail
           product={selectedProduct}
           onAddToCart={handleAddToCart}
@@ -291,7 +396,7 @@ function App() {
         />
       )}
 
-      {showCart && (
+      {!comingSoonPage && showCart && (
         <Cart
           cartItems={cart}
           onUpdateQuantity={handleUpdateQuantity}
@@ -301,7 +406,7 @@ function App() {
         />
       )}
 
-      {showCheckoutPage && (
+      {!comingSoonPage && showCheckoutPage && (
         <Checkout
           cartItems={cart}
           onBack={() => {
@@ -312,7 +417,7 @@ function App() {
         />
       )}
 
-      {showSearchResults && (
+      {!comingSoonPage && showSearchResults && (
         <SearchResults
           searchQuery={searchQuery}
           products={products}
@@ -324,7 +429,7 @@ function App() {
         />
       )}
 
-      {showFavorites && (
+      {!comingSoonPage && showFavorites && (
         <Favorites
           favorites={favorites}
           onProductClick={handleProductClick}
@@ -334,7 +439,7 @@ function App() {
         />
       )}
 
-      {showInventory && (
+      {!comingSoonPage && showInventory && (
         <InventoryManagement
           products={products}
           onUpdateStock={handleUpdateStock}
@@ -342,7 +447,7 @@ function App() {
         />
       )}
 
-      {showCoffeeCategory && (
+      {!comingSoonPage && showCoffeeCategory && (
         <CoffeeCategoryPage
           products={products}
           filters={filters}
@@ -357,7 +462,7 @@ function App() {
         />
       )}
 
-      {showSeedlingsCategory && (
+      {!comingSoonPage && showSeedlingsCategory && (
         <SeedlingsCategoryPage
           products={products}
           filters={filters}
@@ -372,13 +477,13 @@ function App() {
         />
       )}
 
-      {showOnlineStore && (
+      {!comingSoonPage && showOnlineStore && (
         <OnlineStorePage
           onCategoryChange={handleCategoryChange}
         />
       )}
 
-      {currentCategory === 'guide' && (
+      {!comingSoonPage && currentCategory === 'guide' && (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <h2 className="text-3xl font-bold text-good-blue-brown mb-8 text-center">店舗情報・アクセス</h2>
           
@@ -444,13 +549,13 @@ function App() {
         </div>
       )}
 
-      {showCareGuide && (
+      {!comingSoonPage && showCareGuide && (
         <CareGuidePage
           onCategoryChange={handleCategoryChange}
         />
       )}
 
-      {showContact && (
+      {!comingSoonPage && showContact && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <h2 className="text-3xl font-bold text-good-blue-brown mb-8 text-center">お問い合わせ</h2>
           <div className="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto">
@@ -481,7 +586,13 @@ function App() {
         </div>
       )}
 
-      <NewFooter />
+      {!comingSoonPage && showLegalNotice && (
+        <LegalNoticePage
+          onCategoryChange={handleCategoryChange}
+        />
+      )}
+
+      {!comingSoonPage && <NewFooter />}
       
       <Toast
         message={toast.message}

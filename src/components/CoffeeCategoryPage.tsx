@@ -53,7 +53,7 @@ const CoffeeCategoryPage: React.FC<CoffeeCategoryPageProps> = ({
         </div>
         
         {/* カテゴリータイトル */}
-        <h1 className="text-xl md:text-2xl font-display font-bold text-gray-700 mb-8">
+        <h1 className="text-xl md:text-2xl font-display font-bold text-gray-700 mb-2 sm:mb-8">
           カテゴリー「コーヒー」
         </h1>
 

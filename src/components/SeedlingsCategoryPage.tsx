@@ -54,7 +54,7 @@ const SeedlingsCategoryPage: React.FC<SeedlingsCategoryPageProps> = ({
         </div>
         
         {/* カテゴリータイトル */}
-        <h1 className="text-xl md:text-2xl font-display font-bold text-gray-700 mb-8">
+        <h1 className="text-xl md:text-2xl font-display font-bold text-gray-700 mb-2 sm:mb-8">
           カテゴリー「花苗・植物」
         </h1>
 

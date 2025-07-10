@@ -129,11 +129,6 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
 
             {/* アカウント・カート */}
             <div className="flex items-center space-x-4">
-              <button className="hidden md:flex items-center space-x-2 text-gray-700 hover:text-good-blue-gold transition-colors">
-                <User className="h-5 w-5" />
-                <span className="text-sm">マイページ</span>
-              </button>
-              
               <button
                 onClick={() => onCategoryChange('favorites')}
                 className="p-2 text-gray-700 hover:text-good-blue-gold transition-colors relative"
@@ -235,15 +230,24 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
                 育て方・お手入れ
               </button>
 
-              <button className="text-gray-700 hover:text-good-blue-gold font-medium transition-colors">
+              <button 
+                onClick={() => onCategoryChange('blog')}
+                className="text-gray-700 hover:text-good-blue-gold font-medium transition-colors"
+              >
                 ブログ
               </button>
 
-              <button className="text-gray-700 hover:text-good-blue-gold font-medium transition-colors">
+              <button 
+                onClick={() => onCategoryChange('interview')}
+                className="text-gray-700 hover:text-good-blue-gold font-medium transition-colors"
+              >
                 インタビュー
               </button>
 
-              <button className="text-gray-700 hover:text-good-blue-gold font-medium transition-colors">
+              <button 
+                onClick={() => onCategoryChange('wholesale')}
+                className="text-gray-700 hover:text-good-blue-gold font-medium transition-colors"
+              >
                 業務用卸売販売
               </button>
             </div>
@@ -260,33 +264,39 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
               className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
             >
               <nav className="container-base py-4 space-y-2">
-                <button
-                  onClick={() => {
-                    onCategoryChange('store');
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  オンラインストア
-                </button>
-                <button
-                  onClick={() => {
-                    onCategoryChange('coffee');
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  コーヒーについて
-                </button>
-                <button
-                  onClick={() => {
-                    onCategoryChange('seedlings');
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  花苗・植物
-                </button>
+                <div>
+                  <button
+                    onClick={() => {
+                      onCategoryChange('store');
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                  >
+                    オンラインストア
+                  </button>
+                  {/* オンラインストアのサブメニュー */}
+                  <div className="ml-8 mt-1 space-y-1">
+                    <button
+                      onClick={() => {
+                        onCategoryChange('coffee');
+                        setIsMenuOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors text-sm"
+                    >
+                      └ コーヒー
+                    </button>
+                    <button
+                      onClick={() => {
+                        onCategoryChange('seedlings');
+                        setIsMenuOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors text-sm"
+                    >
+                      └ 花苗・植物
+                    </button>
+                  </div>
+                </div>
+                
                 <button
                   onClick={() => {
                     onCategoryChange('guide');
@@ -296,6 +306,78 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
                 >
                   店舗案内
                 </button>
+                
+                <button
+                  onClick={() => {
+                    onCategoryChange('care');
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  育て方・お手入れ
+                </button>
+                
+                <button
+                  onClick={() => {
+                    onCategoryChange('blog');
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  ブログ
+                </button>
+                
+                <button
+                  onClick={() => {
+                    onCategoryChange('interview');
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  インタビュー
+                </button>
+                
+                <button
+                  onClick={() => {
+                    onCategoryChange('wholesale');
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  業務用卸売販売
+                </button>
+                
+                {/* モバイル用検索バー */}
+                <div className="pt-2 px-4">
+                  <form onSubmit={handleSearch} className="relative">
+                    <input
+                      type="text"
+                      placeholder="何をお探しですか？"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-full focus:ring-2 focus:ring-good-blue-gold focus:border-transparent"
+                    />
+                    <button
+                      type="submit"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-600 hover:text-good-blue-gold"
+                    >
+                      <Search className="h-4 w-4" />
+                    </button>
+                  </form>
+                </div>
+                
+                {/* 特定商取引法に基づく表記 */}
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <button
+                    onClick={() => {
+                      onCategoryChange('legal');
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 text-xs text-gray-500 hover:text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  >
+                    特定商取引法に基づく表記
+                  </button>
+                </div>
               </nav>
             </motion.div>
           )}

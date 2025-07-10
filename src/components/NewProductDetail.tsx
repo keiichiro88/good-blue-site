@@ -32,6 +32,7 @@ const NewProductDetail: React.FC<NewProductDetailProps> = ({
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<'description' | 'details' | 'reviews'>('description');
+  const [isImageTransitioning, setIsImageTransitioning] = useState(false);
 
   // 複数画像のサンプル（実際の実装では商品データに含める）
   const productImages = [
@@ -75,18 +76,27 @@ const NewProductDetail: React.FC<NewProductDetailProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* 画像セクション */}
           <div>
-            <div className="relative">
-              <motion.img
-                key={selectedImageIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                src={productImages[selectedImageIndex]}
-                alt={product.name}
-                className="w-full rounded-lg"
-              />
+            <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
+              {productImages.map((image, index) => (
+                <motion.img
+                  key={index}
+                  src={image}
+                  alt={product.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: selectedImageIndex === index ? 1 : 0,
+                    scale: selectedImageIndex === index ? 1 : 1.05
+                  }}
+                  transition={{ 
+                    duration: 0.5,
+                    ease: "easeInOut"
+                  }}
+                  style={{ pointerEvents: selectedImageIndex === index ? 'auto' : 'none' }}
+                />
+              ))}
               {!product.inStock && (
-                <div className="absolute inset-0 bg-white/80 rounded-lg flex items-center justify-center">
+                <div className="absolute inset-0 bg-white/80 rounded-lg flex items-center justify-center z-10">
                   <span className="text-2xl font-medium text-gray-600">在庫切れ</span>
                 </div>
               )}
@@ -95,15 +105,31 @@ const NewProductDetail: React.FC<NewProductDetailProps> = ({
             {/* サムネイル画像 */}
             <div className="flex gap-4 mt-4">
               {productImages.map((image, index) => (
-                <button
+                <motion.button
                   key={index}
-                  onClick={() => setSelectedImageIndex(index)}
-                  className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImageIndex === index ? 'border-good-blue-gold' : 'border-gray-200'
+                  onClick={() => {
+                    if (selectedImageIndex !== index && !isImageTransitioning) {
+                      setIsImageTransitioning(true);
+                      setSelectedImageIndex(index);
+                      setTimeout(() => setIsImageTransitioning(false), 500);
+                    }
+                  }}
+                  className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                    selectedImageIndex === index ? 'border-good-blue-gold' : 'border-gray-200 hover:border-gray-400'
                   }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
-                </button>
+                  {selectedImageIndex === index && (
+                    <motion.div
+                      className="absolute inset-0 bg-good-blue-gold/20"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </motion.button>
               ))}
             </div>
           </div>

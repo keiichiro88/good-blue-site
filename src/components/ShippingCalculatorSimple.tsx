@@ -8,7 +8,6 @@ interface ShippingCalculatorSimpleProps {
 
 const ShippingCalculatorSimple: React.FC<ShippingCalculatorSimpleProps> = ({ subtotal, onClose }) => {
   const [formData, setFormData] = useState({
-    postalCode: '',
     prefecture: '',
     weight: '1'
   });
@@ -73,36 +72,6 @@ const ShippingCalculatorSimple: React.FC<ShippingCalculatorSimpleProps> = ({ sub
       </div>
 
       <div className="space-y-4">
-        {/* 郵便番号入力 */}
-        <div>
-          <label htmlFor="postal-code" className="block text-sm font-medium text-good-blue-brown mb-1">
-            郵便番号（ハイフンなし）
-          </label>
-          <input
-            id="postal-code"
-            type="text"
-            value={formData.postalCode}
-            onChange={(e) => {
-              setFormData(prev => ({ ...prev, postalCode: e.target.value }));
-            }}
-            onBlur={(e) => {
-              // フォーカスが外れた時に数字以外を除去
-              const numericValue = e.target.value.replace(/[^\d]/g, '').substring(0, 7);
-              setFormData(prev => ({ ...prev, postalCode: numericValue }));
-            }}
-            placeholder="8794911"
-            maxLength={10}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-good-blue-gold focus:border-transparent"
-          />
-          <p className="text-xs text-good-blue-brown/60 mt-1">
-            {formData.postalCode ? (
-              <>入力中: {formData.postalCode.replace(/[^\d]/g, '').slice(0, 3)}{formData.postalCode.replace(/[^\d]/g, '').length > 3 ? '-' + formData.postalCode.replace(/[^\d]/g, '').slice(3, 7) : ''}</>
-            ) : (
-              '数字7桁を入力してください（ハイフンは自動で除去されます）'
-            )}
-          </p>
-        </div>
-
         {/* 都道府県選択 */}
         <div>
           <label htmlFor="prefecture" className="block text-sm font-medium text-good-blue-brown mb-1">

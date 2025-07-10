@@ -8,23 +8,23 @@ interface CareGuidePageProps {
 
 const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
   return (
-    <div className="min-h-screen bg-good-blue-cream">
+    <div className="min-h-screen bg-good-blue-cream overflow-x-hidden">
       {/* ファーストビュー */}
-      <section className="relative">
+      <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent pointer-events-none" />
-        <div className="container-base pt-16 pb-12">
+        <div className="container-base pt-16 pb-12 px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-8">
+            <h1 className="text-2xl md:text-4xl font-display font-bold text-gray-800 mb-8 px-4 md:px-0">
               この夏、ベランダが楽園に変わる！<br className="hidden md:block" />
               初心者でも絶対きれいに咲かせられる、夏の花苗かんたん育成術
             </h1>
             
-            <div className="space-y-4 text-lg text-gray-700 mb-8">
+            <div className="space-y-4 text-base md:text-lg text-gray-700 mb-8 px-4 md:px-0">
               <p className="italic">
                 「うだるような暑い夏。でも、お家に帰ったとき、<br className="hidden md:block" />
                 窓の外に涼しげでカラフルな花々が咲いていたら…？<br className="hidden md:block" />
@@ -64,8 +64,8 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
       </section>
 
       {/* Chapter 1: 夏の苗選び */}
-      <section className="py-16 bg-white">
-        <div className="container-base">
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="container-base px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -73,13 +73,13 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center px-4 md:px-0">
               <span className="text-good-blue-gold">Chapter 1</span><br />
               夏の苗選びはココが違う！<br />
               プロが教える「夏顔べっぴん苗」の見つけ方
             </h2>
             
-            <p className="text-lg text-gray-700 mb-8 text-center">
+            <p className="text-base md:text-lg text-gray-700 mb-8 text-center px-4 md:px-0">
               元気な苗を選ぶのが成功への一番の近道！<br />
               暑い夏を乗り切る力を持った「夏顔べっぴん苗」を見分けるポイントはこちらです。
             </p>
@@ -145,8 +145,8 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
       </section>
 
       {/* Chapter 2: 水・風・ごはんの3つの鉄則 */}
-      <section className="py-16 bg-gradient-to-b from-blue-50/30 to-transparent">
-        <div className="container-base">
+      <section className="py-16 bg-gradient-to-b from-blue-50/30 to-transparent overflow-hidden">
+        <div className="container-base px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -154,13 +154,13 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center px-4 md:px-0">
               <span className="text-good-blue-gold">Chapter 2</span><br />
               夏のお世話はこれだけ！<br />
               「水・風・ごはん」３つの鉄則
             </h2>
             
-            <p className="text-lg text-gray-700 mb-12 text-center">
+            <p className="text-base md:text-lg text-gray-700 mb-12 text-center px-4 md:px-0">
               「毎日あれこれ大変そう…」いえいえ、夏のお世話はポイントを絞ればとってもシンプル。<br />
               この３つの鉄則を守るだけでOKです！
             </p>
@@ -250,8 +250,8 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
       </section>
 
       {/* Chapter 3: プロのひと手間 */}
-      <section className="py-16 bg-white">
-        <div className="container-base">
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="container-base px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -259,13 +259,13 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center px-4 md:px-0">
               <span className="text-good-blue-gold">Chapter 3</span><br />
               プロのひと手間！<br />
               夏中ずっと花いっぱいにする魔法
             </h2>
             
-            <p className="text-lg text-gray-700 mb-12 text-center">
+            <p className="text-base md:text-lg text-gray-700 mb-12 text-center px-4 md:px-0">
               基本のお世話にプラスワン！<br />
               このひと手間で、秋までずっとお花が咲き続けます。
             </p>
@@ -331,8 +331,8 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
       </section>
 
       {/* Chapter 4: おすすめ花苗 */}
-      <section className="py-16 bg-gradient-to-b from-yellow-50/30 to-transparent">
-        <div className="container-base">
+      <section className="py-16 bg-gradient-to-b from-yellow-50/30 to-transparent overflow-hidden">
+        <div className="container-base px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -340,13 +340,13 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center px-4 md:px-0">
               <span className="text-good-blue-gold">Chapter 4</span><br />
               この夏、主役はどれにする？<br />
               当店自慢の「夏うまれ」花苗コレクション！
             </h2>
             
-            <p className="text-lg text-gray-700 mb-12 text-center">
+            <p className="text-base md:text-lg text-gray-700 mb-12 text-center px-4 md:px-0">
               さあ、育て方がわかったら、いよいよ主役選び！<br />
               夏の暑さや乾燥に強く、初心者さんでも育てやすい、<br />
               とびきり元気な花苗たちをご紹介します。
@@ -442,8 +442,8 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
       </section>
 
       {/* まとめ */}
-      <section className="py-16 bg-white">
-        <div className="container-base">
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="container-base px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -477,9 +477,9 @@ const CareGuidePage: React.FC<CareGuidePageProps> = ({ onCategoryChange }) => {
       </section>
 
       {/* リンクバナー */}
-      <section className="py-16 bg-good-blue-light">
-        <div className="container-base">
-          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+      <section className="py-16 bg-good-blue-light overflow-hidden">
+        <div className="container-base px-4">
+          <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-8 text-center px-4 md:px-0">
             ▼ガーデニングデビューに必要なのはこちら！▼
           </h3>
           

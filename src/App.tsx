@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
+import NewHeader from './components/NewHeader';
+import ResponsiveHero from './components/ResponsiveHero';
+import FeatureSection from './components/FeatureSection';
+import CategoryShowcase from './components/CategoryShowcase';
+import SeasonalRecommendations from './components/SeasonalRecommendations';
 import HeroContent from './components/HeroContent';
 import ProductGrid from './components/ProductGrid';
 import FilterPanel from './components/FilterPanel';
 import AboutSection from './components/AboutSection';
-import Footer from './components/Footer';
+import NewFooter from './components/NewFooter';
 import Cart from './components/Cart';
 import Toast from './components/Toast';
-import ProductDetail from './components/ProductDetail';
+import NewProductDetail from './components/NewProductDetail';
 import Checkout from './components/Checkout';
 import SearchResults from './components/SearchResults';
 import Favorites from './components/Favorites';
@@ -38,6 +41,11 @@ function App() {
     });
     setSelectedProduct(null); // カテゴリー変更時に商品詳細を閉じる
     setSearchQuery(''); // カテゴリー変更時に検索をクリア
+    
+    // カートやその他のページに遷移時は上部にスクロール
+    if (category === 'cart' || category === 'checkout' || category === 'favorites' || category === 'inventory') {
+      window.scrollTo(0, 0);
+    }
   };
 
   const handleAddToCart = (product: Product, quantity: number = 1) => {
@@ -208,7 +216,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
-      <Header 
+      <NewHeader 
         onCategoryChange={handleCategoryChange} 
         cartItemCount={cartItemCount}
         onSearch={handleSearch}
@@ -217,8 +225,16 @@ function App() {
       
       {showHero && (
         <>
-          <Hero onCategoryChange={handleCategoryChange} />
-          <HeroContent onCategoryChange={handleCategoryChange} />
+          <ResponsiveHero onCategoryChange={handleCategoryChange} />
+          <CategoryShowcase onCategoryChange={handleCategoryChange} />
+          <FeatureSection onCategoryChange={handleCategoryChange} />
+          <SeasonalRecommendations
+            products={products}
+            onAddToCart={handleAddToCart}
+            onProductClick={handleProductClick}
+            onToggleFavorite={handleToggleFavorite}
+            isFavorite={isFavorite}
+          />
           <AboutSection />
         </>
       )}
@@ -251,7 +267,7 @@ function App() {
       )}
 
       {showProductDetail && selectedProduct && (
-        <ProductDetail
+        <NewProductDetail
           product={selectedProduct}
           onAddToCart={handleAddToCart}
           onGoBack={handleGoBack}
@@ -325,7 +341,7 @@ function App() {
               <div>
                 <h3 className="text-xl font-semibold text-good-blue-brown mb-4">店舗情報</h3>
                 <p className="text-good-blue-brown/80 mb-4">
-                  花とカフェ goodblue (グッドブルー)<br />
+                  花とカフェ goodblue (グッドブルー）<br />
                   〒879-4911<br />
                   大分県玖珠郡九重町田野1672-18<br />
                   TEL: 090-3013-7032
@@ -390,7 +406,7 @@ function App() {
         </div>
       )}
 
-      <Footer />
+      <NewFooter />
       
       <Toast
         message={toast.message}

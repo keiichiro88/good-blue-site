@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Grid, List, SortAsc } from 'lucide-react';
-import ProductCard from './ProductCard';
+import NewProductCard from './NewProductCard';
 import ProductListView from './ProductListView';
 import { Product, FilterOptions } from '../types';
 
@@ -145,7 +145,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, filters, onAddToCar
         }`}>
           {filteredProducts.map(product => (
             viewMode === 'grid' ? (
-              <ProductCard
+              <NewProductCard
                 key={product.id}
                 product={product}
                 onAddToCart={onAddToCart}

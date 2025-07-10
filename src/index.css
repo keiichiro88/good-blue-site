@@ -1,3 +1,168 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ベースレイヤーのカスタマイズ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-gray-700 antialiased;
+    font-feature-settings: "palt" 1;
+    letter-spacing: 0.03em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-good-blue-brown font-medium;
+    font-feature-settings: "palt" 1;
+  }
+
+  /* 日本語フォントの最適化 */
+  .font-ja {
+    font-feature-settings: "palt" 1;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+  }
+
+  /* 英語フォントスタイル */
+  .font-en {
+    @apply font-display tracking-wide;
+  }
+}
+
+/* コンポーネントレイヤー */
+@layer components {
+  /* セクションの共通スタイル */
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  /* コンテナの共通スタイル */
+  .container-base {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* 見出しスタイル */
+  .heading-primary {
+    @apply text-3xl md:text-4xl lg:text-5xl font-medium leading-tight;
+  }
+
+  .heading-secondary {
+    @apply text-2xl md:text-3xl lg:text-4xl font-medium leading-tight;
+  }
+
+  .heading-tertiary {
+    @apply text-xl md:text-2xl lg:text-3xl font-medium leading-tight;
+  }
+
+  /* ボタンの基本スタイル */
+  .btn-base {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply btn-base bg-good-blue-gold text-white hover:bg-good-blue-brown hover:shadow-medium;
+  }
+
+  .btn-secondary {
+    @apply btn-base bg-white text-good-blue-brown border border-good-blue-brown hover:bg-good-blue-light hover:shadow-soft;
+  }
+
+  /* カードスタイル */
+  .card-base {
+    @apply bg-white rounded-lg overflow-hidden transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:shadow-large hover:-translate-y-1;
+  }
+}
+
+/* ユーティリティレイヤー */
+@layer utilities {
+  /* テキストバランス */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* グラデーションオーバーレイ */
+  .gradient-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/50 to-transparent;
+  }
+
+  /* アスペクト比 */
+  .aspect-3\/2 {
+    aspect-ratio: 3 / 2;
+  }
+
+  .aspect-2\/3 {
+    aspect-ratio: 2 / 3;
+  }
+
+  .aspect-4\/3 {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* カスタムアニメーション */
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
+
+/* スクロールバーのカスタマイズ */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Swiperカスタムスタイル */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1);
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0 6px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
+
+/* テキストシャドウユーティリティ */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow-strong {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}

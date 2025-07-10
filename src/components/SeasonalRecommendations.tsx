@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Calendar, Sparkles, TrendingUp } from 'lucide-react';
+import { Calendar, Sparkles } from 'lucide-react';
 import NewProductCard from './NewProductCard';
 import { Product } from '../types';
 
@@ -130,60 +130,76 @@ const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
             ))}
           </div>
 
-          {/* 特別企画バナー */}
+          {/* 特別企画バナー - 店主からのメッセージ風 */}
           <motion.div
             variants={itemVariants}
-            className="bg-gradient-to-r from-good-blue-gold to-good-blue-brown rounded-lg p-8 text-white"
+            className="mb-16"
           >
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <h3 className="text-2xl font-display font-semibold mb-2">
-                  夏の特別セット販売中
-                </h3>
-                <p className="text-white/90 mb-4">
-                  人気の夏植物3点セット + オリジナル培養土付き
-                </p>
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl font-bold">¥5,980</span>
-                  <span className="text-lg line-through opacity-70">¥7,500</span>
-                  <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
-                    20%OFF
-                  </span>
+            <h3 className="text-2xl font-bold text-good-blue-brown text-center mb-8">店主おすすめ！夏の特別セット</h3>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-6xl mx-auto">
+              <div className="md:flex">
+                <div className="md:w-2/5">
+                  <div className="relative h-full min-h-[300px]">
+                    <img 
+                      src="/images/products/20240521-224-768x512.jpg" 
+                      alt="夏の特別セット" 
+                      className="w-full h-full object-cover"
+                    />
+                    {/* 期間限定バッジ */}
+                    <div className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                      期間限定
+                    </div>
+                  </div>
+                </div>
+                <div className="p-8 md:w-3/5 bg-gradient-to-br from-good-blue-light/30 to-white">
+                  <h4 className="text-xl md:text-2xl font-display font-bold text-good-blue-brown mb-4">
+                    夏の特別セット販売中
+                  </h4>
+                  <p className="text-good-blue-brown/80 leading-relaxed mb-4">
+                    こんにちは、店主の的場です。<br />
+                    この夏、特におすすめしたい植物を厳選してセットにしました。九重の涼しい環境で育った夏の植物は、暑さに強く、初心者の方でも育てやすいのが特徴です。
+                  </p>
+                  <p className="text-good-blue-brown/80 leading-relaxed mb-6">
+                    セット内容：人気の夏植物3点 + オリジナル培養土<br />
+                    通常価格¥7,500のところ、期間限定で<span className="font-bold text-good-blue-gold">¥5,980（20%OFF）</span>でご提供いたします。
+                  </p>
+                  
+                  {/* 特典 */}
+                  <div className="bg-white/80 rounded-lg p-4 mb-6">
+                    <p className="font-medium text-good-blue-brown mb-2">セット購入特典：</p>
+                    <ul className="text-sm text-good-blue-brown/80 space-y-1">
+                      <li>✓ 送料無料でお届け（通常¥600〜）</li>
+                      <li>✓ 私が作成した育て方ガイドブック付き</li>
+                      <li>✓ 30日間の枯れ保証付き</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="flex items-baseline gap-3">
+                      <span className="text-sm text-gray-600 line-through">¥7,500</span>
+                      <span className="text-3xl font-bold text-good-blue-gold">¥5,980</span>
+                      <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        20%OFF
+                      </span>
+                    </div>
+                    <div className="text-right">
+                      <button className="bg-good-blue-gold text-white px-8 py-3 rounded-lg font-medium hover:bg-good-blue-brown transition-colors shadow-md mb-2">
+                        詳細を見る
+                      </button>
+                      <p className="text-sm text-red-600 font-medium">
+                        残り5セット限り
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-right text-good-blue-brown/60 text-sm mt-4">
+                    goodblue 店主　的場達郎
+                  </p>
                 </div>
               </div>
-              <button className="bg-white text-good-blue-brown px-6 py-3 rounded-lg font-medium hover:bg-good-blue-light transition-colors">
-                詳細を見る
-              </button>
             </div>
           </motion.div>
 
-          {/* 今月のトレンド */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            <div className="bg-white rounded-lg p-6 shadow-soft text-center">
-              <TrendingUp className="h-8 w-8 text-green-600 mx-auto mb-3" />
-              <h4 className="font-medium text-gray-900 mb-2">多肉植物</h4>
-              <p className="text-sm text-gray-600">
-                水やり少なめで夏も安心
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-soft text-center">
-              <TrendingUp className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <h4 className="font-medium text-gray-900 mb-2">アイスコーヒー</h4>
-              <p className="text-sm text-gray-600">
-                専用豆で本格的な味わい
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-soft text-center">
-              <TrendingUp className="h-8 w-8 text-yellow-600 mx-auto mb-3" />
-              <h4 className="font-medium text-gray-900 mb-2">ハーブ苗</h4>
-              <p className="text-sm text-gray-600">
-                料理に使えて実用的
-              </p>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

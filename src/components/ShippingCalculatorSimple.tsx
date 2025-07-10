@@ -51,7 +51,7 @@ const ShippingCalculatorSimple: React.FC<ShippingCalculatorSimpleProps> = ({ sub
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-good-blue-brown flex items-center gap-2">
           <Truck className="h-5 w-5" />
-          送料計算
+          送料計算（参考価格）
         </h3>
         {onClose && (
           <button
@@ -61,6 +61,15 @@ const ShippingCalculatorSimple: React.FC<ShippingCalculatorSimpleProps> = ({ sub
             ×
           </button>
         )}
+      </div>
+
+      {/* 送料に関する重要な注記 */}
+      <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+        <p className="text-sm font-medium text-yellow-800 mb-1">※ 送料について</p>
+        <p className="text-xs text-yellow-700">
+          表示される送料は参考価格です。実際の送料は商品のサイズ・重量・配送時期により変動する場合があります。
+          正確な送料はご注文確定後にお知らせいたします。
+        </p>
       </div>
 
       <div className="space-y-4">
@@ -145,6 +154,7 @@ const ShippingCalculatorSimple: React.FC<ShippingCalculatorSimpleProps> = ({ sub
               <p>• 送料は大分県からの発送料金です</p>
               <p>• 5,000円以上のご購入で全国送料無料</p>
               <p>• 離島・一部地域は追加料金がかかる場合があります</p>
+              <p>• <strong>実際の送料は商品により異なるため、詳細はお問い合わせください</strong></p>
             </div>
           </div>
         </div>

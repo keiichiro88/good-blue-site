@@ -164,21 +164,21 @@ const NewHeader: React.FC<NewHeaderProps> = ({
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <form onSubmit={handleSearch} className="py-4">
+                <form onSubmit={handleSearch} className="py-3 px-4 md:py-4 md:px-0">
                   <div className="relative max-w-xl mx-auto">
                     <input
                       type="text"
                       placeholder="植物名やコーヒーを検索..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-good-blue-gold focus:border-transparent"
+                      className="w-full px-3 py-2 pr-10 md:px-4 md:py-3 md:pr-12 text-sm md:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-good-blue-gold focus:border-transparent"
                       autoFocus
                     />
                     <button
                       type="submit"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-600 hover:text-good-blue-gold"
+                      className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 p-1.5 md:p-2 text-gray-600 hover:text-good-blue-gold"
                     >
-                      <Search className="h-5 w-5" />
+                      <Search className="h-4 w-4 md:h-5 md:w-5" />
                     </button>
                   </div>
                 </form>
@@ -240,9 +240,19 @@ const NewHeader: React.FC<NewHeaderProps> = ({
       </header>
 
       {/* お知らせバー */}
-      <div className="bg-good-blue-light py-3 text-center">
-        <p className="text-sm text-gray-700">
-          🌸 春の新作苗入荷しました！季節限定の山野草もご用意しております
+      <div 
+        className="bg-good-blue-light py-3 text-center cursor-pointer hover:bg-good-blue-gold/20 transition-colors"
+        onClick={() => {
+          // 季節のおすすめセクションへスクロール
+          const element = document.querySelector('.seasonal-section');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+      >
+        <p className="text-sm text-gray-700 flex items-center justify-center gap-2">
+          🌻 夏の新作苗入荷しました！季節限定の夏野草もご用意しております
+          <span className="text-good-blue-gold">→</span>
         </p>
       </div>
     </>

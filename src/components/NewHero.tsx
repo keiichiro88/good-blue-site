@@ -81,28 +81,7 @@ const NewHero: React.FC<NewHeroProps> = ({ onCategoryChange }) => {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
               </div>
 
-              {/* コンテンツ */}
-              <div className="relative h-full flex items-center justify-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-center text-white px-4"
-                >
-                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 text-shadow-strong">
-                    {slide.title}
-                  </h1>
-                  <p className="text-lg md:text-xl lg:text-2xl mb-8 font-medium text-shadow">
-                    {slide.subtitle}
-                  </p>
-                  <button
-                    onClick={slide.action}
-                    className="bg-white text-good-blue-brown px-8 py-4 rounded-lg font-medium hover:bg-good-blue-light transition-all duration-300 transform hover:scale-105 shadow-lg"
-                  >
-                    {slide.buttonText}
-                  </button>
-                </motion.div>
-              </div>
+              {/* コンテンツ - 削除 */}
             </div>
           </SwiperSlide>
         ))}

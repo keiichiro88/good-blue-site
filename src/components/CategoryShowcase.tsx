@@ -16,7 +16,7 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
   const categories = [
     {
       id: 'coffee',
-      title: 'オリジナルコーヒードリップバッグ',
+      title: 'オリジナルコーヒー（ドリップバッグ）',
       description: '【人気No.1】見た目も可愛い！こだわりのパッケージデザインが大好評。goodblue自家焙煎の特別なブレンドで、お客様に愛される理由がここに。［※オーナーのこだわりポイントをここに追加予定］ギフトにも最適です♪',
       image: '/images/products/20240521-356-768x512.jpg',
       icon: Coffee,
@@ -73,10 +73,10 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
         >
           {/* セクションタイトル */}
           <div className="text-center mb-12">
-            <h2 className="text-sm font-display text-gray-600 tracking-wider mb-2">
+            <h2 className="text-2xl md:text-3xl font-display font-semibold text-gray-700 tracking-wide mb-3">
               Online Store
             </h2>
-            <div className="w-16 h-px bg-gray-400 mx-auto"></div>
+            <div className="w-20 h-px bg-gray-400 mx-auto"></div>
           </div>
 
           {/* カテゴリーグリッド */}
@@ -89,8 +89,8 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
                 onClick={() => onCategoryChange(category.id)}
               >
                 <div className="bg-white rounded-lg overflow-hidden shadow-soft hover:shadow-large transition-all duration-300">
-                  {/* 画像部分 */}
-                  <div className="relative h-48 bg-gray-200 overflow-hidden">
+                  {/* 画像部分 - 高さを増やしてより大きく表示 */}
+                  <div className="relative h-80 md:h-96 bg-gray-200 overflow-hidden">
                     <img
                       src={category.image}
                       alt={category.title}
@@ -111,15 +111,15 @@ const CategoryShowcase: React.FC<CategoryShowcaseProps> = ({ onCategoryChange })
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
-                  {/* コンテンツ部分 */}
-                  <div className="p-6">
-                    <h3 className="text-lg font-display font-semibold text-gray-900 mb-3 group-hover:text-good-blue-gold transition-colors">
+                  {/* コンテンツ部分 - パディングとテキストサイズを調整 */}
+                  <div className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-display font-semibold text-gray-900 mb-3 group-hover:text-good-blue-gold transition-colors">
                       {category.title}
                     </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-4">
+                    <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4 line-clamp-3">
                       {category.description}
                     </p>
-                    <button className="text-sm text-good-blue-gold font-medium hover:text-good-blue-brown transition-colors inline-flex items-center gap-2">
+                    <button className="text-sm md:text-base text-good-blue-gold font-medium hover:text-good-blue-brown transition-colors inline-flex items-center gap-2">
                       {category.buttonText}
                       <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MapPin, Clock, Instagram, Facebook, Mail } from 'lucide-react';
+import { Phone, MapPin, Clock, Instagram } from 'lucide-react';
 
 const NewFooter: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -19,14 +19,14 @@ const NewFooter: React.FC = () => {
               花とカフェのお店です。
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-good-blue-cream hover:text-good-blue-gold transition-colors">
+              <a 
+                href="https://www.instagram.com/good_blue77" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-good-blue-cream hover:text-good-blue-gold transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-good-blue-cream hover:text-good-blue-gold transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="mailto:info@goodblue.jp" className="text-good-blue-cream hover:text-good-blue-gold transition-colors">
-                <Mail className="h-5 w-5" />
               </a>
             </div>
           </div>

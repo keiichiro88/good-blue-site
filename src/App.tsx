@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NewHeader from './components/NewHeader';
+import EnhancedHeader from './components/EnhancedHeader';
 import ResponsiveHero from './components/ResponsiveHero';
 import FeatureSection from './components/FeatureSection';
 import CategoryShowcase from './components/CategoryShowcase';
@@ -42,8 +42,9 @@ function App() {
     setSelectedProduct(null); // カテゴリー変更時に商品詳細を閉じる
     setSearchQuery(''); // カテゴリー変更時に検索をクリア
     
-    // カートやその他のページに遷移時は上部にスクロール
-    if (category === 'cart' || category === 'checkout' || category === 'favorites' || category === 'inventory') {
+    // 特定のページに遷移時は上部にスクロール
+    if (category === 'cart' || category === 'checkout' || category === 'favorites' || category === 'inventory' || 
+        category === 'seedlings' || category === 'coffee' || category === 'gift') {
       window.scrollTo(0, 0);
     }
   };
@@ -216,7 +217,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
-      <NewHeader 
+      <EnhancedHeader 
         onCategoryChange={handleCategoryChange} 
         cartItemCount={cartItemCount}
         onSearch={handleSearch}

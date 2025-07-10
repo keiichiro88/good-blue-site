@@ -12,8 +12,9 @@ import ProductDetail from './components/ProductDetail';
 import Checkout from './components/Checkout';
 import SearchResults from './components/SearchResults';
 import Favorites from './components/Favorites';
+import InventoryManagement from './components/InventoryManagement';
 import { Phone } from 'lucide-react';
-import { products } from './data/products';
+import { products as initialProducts } from './data/products';
 import { reviews as initialReviews } from './data/reviews';
 import { Product, FilterOptions, CartItem, Review } from './types';
 
@@ -28,6 +29,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState<Product[]>([]);
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
+  const [products, setProducts] = useState<Product[]>(initialProducts);
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
@@ -167,6 +169,28 @@ function App() {
     );
   };
 
+  // 在庫更新ハンドラー
+  const handleUpdateStock = (productId: string, newStock: number) => {
+    setProducts(prevProducts => 
+      prevProducts.map(product => 
+        product.id === productId 
+          ? { ...product, stock: newStock, inStock: newStock > 0 }
+          : product
+      )
+    );
+    setToast({ show: true, message: '在庫を更新しました' });
+  };
+
+  // 商品更新ハンドラー
+  const handleUpdateProduct = (updatedProduct: Product) => {
+    setProducts(prevProducts => 
+      prevProducts.map(product => 
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+    setToast({ show: true, message: '商品情報を更新しました' });
+  };
+
   const getProductReviews = (productId: string) => {
     return reviews.filter(review => review.productId === productId);
   };
@@ -180,6 +204,7 @@ function App() {
   const showCheckoutPage = showCheckout && currentCategory === 'checkout';
   const showSearchResults = currentCategory === 'search' && !selectedProduct;
   const showFavorites = currentCategory === 'favorites' && !selectedProduct;
+  const showInventory = currentCategory === 'inventory' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -280,6 +305,14 @@ function App() {
           onAddToCart={handleAddToCart}
           onRemoveFavorite={handleRemoveFavorite}
           onContinueShopping={handleContinueShopping}
+        />
+      )}
+
+      {showInventory && (
+        <InventoryManagement
+          products={products}
+          onUpdateStock={handleUpdateStock}
+          onUpdateProduct={handleUpdateProduct}
         />
       )}
 

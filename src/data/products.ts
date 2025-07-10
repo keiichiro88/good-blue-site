@@ -14,6 +14,7 @@ export const products: Product[] = [
     bloom: '4月〜5月',
     sunlight: '半日陰',
     inStock: true,
+    stock: 25,
     rating: 4.9,
     reviews: 23
   },
@@ -29,6 +30,7 @@ export const products: Product[] = [
     bloom: '7月〜9月',
     sunlight: '日向〜半日陰',
     inStock: true,
+    stock: 32,
     rating: 4.8,
     reviews: 18
   },
@@ -42,6 +44,7 @@ export const products: Product[] = [
     description: '高山性の希少なシダ植物。清楚な姿が魅力',
     difficulty: 'hard',
     inStock: true,
+    stock: 8,
     rating: 4.7,
     reviews: 15
   },
@@ -55,6 +58,7 @@ export const products: Product[] = [
     description: '白い可愛らしい花を咲かせる九州の山野草',
     difficulty: 'medium',
     inStock: true,
+    stock: 18,
     rating: 4.8,
     reviews: 21
   },
@@ -68,6 +72,7 @@ export const products: Product[] = [
     description: '淡い紫色の花が秋を彩る野草',
     difficulty: 'easy',
     inStock: true,
+    stock: 45,
     rating: 4.6,
     reviews: 29
   },
@@ -81,6 +86,7 @@ export const products: Product[] = [
     description: '黒紫色のシックな花が特徴の希少種',
     difficulty: 'hard',
     inStock: true,
+    stock: 3,
     rating: 4.9,
     reviews: 12
   },
@@ -96,7 +102,8 @@ export const products: Product[] = [
     roastLevel: 'medium',
     origin: 'グアテマラ',
     organic: true,
-    inStock: true,
+    inStock: false,
+    stock: 0,
     rating: 4.9,
     reviews: 67
   },
@@ -112,6 +119,7 @@ export const products: Product[] = [
     origin: 'ブレンド',
     organic: false,
     inStock: true,
+    stock: 12,
     rating: 4.8,
     reviews: 52
   },
@@ -127,6 +135,7 @@ export const products: Product[] = [
     origin: 'オリジナル',
     organic: true,
     inStock: true,
+    stock: 20,
     rating: 4.7,
     reviews: 43
   },
@@ -142,6 +151,7 @@ export const products: Product[] = [
     origin: 'オリジナル',
     organic: true,
     inStock: true,
+    stock: 6,
     rating: 4.9,
     reviews: 71
   }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShoppingCart, Heart, Truck, Shield, Leaf, Plus, Minus, MessageSquare } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Heart, Truck, Shield, Leaf, Plus, Minus, MessageSquare, Calculator } from 'lucide-react';
 import { Product, Review } from '../types';
 import ReviewSummary from './ReviewSummary';
 import ReviewList from './ReviewList';
 import ReviewForm from './ReviewForm';
+import ShippingCalculatorSimple from './ShippingCalculatorSimple';
 
 interface ProductDetailProps {
   product: Product;
@@ -34,6 +35,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [activeTab, setActiveTab] = useState<'details' | 'reviews'>('details');
+  const [showShippingCalculator, setShowShippingCalculator] = useState(false);
   
   // 商品画像の配列（実際の実装では複数画像を用意）
   const productImages = [
@@ -232,6 +234,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 <p className="text-xs text-good-blue-brown/70 mt-1">
                   5,000円以上のご購入で送料無料
                 </p>
+                <button
+                  onClick={() => setShowShippingCalculator(!showShippingCalculator)}
+                  className="text-xs text-good-blue-gold hover:text-good-blue-gold/80 mt-1 flex items-center gap-1"
+                >
+                  <Calculator className="h-3 w-3" />
+                  送料を計算する
+                </button>
               </div>
             </div>
 
@@ -257,6 +266,16 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
               </div>
             )}
           </div>
+
+          {/* 送料計算機 */}
+          {showShippingCalculator && (
+            <div className="mt-6">
+              <ShippingCalculatorSimple 
+                subtotal={product.price * quantity}
+                onClose={() => setShowShippingCalculator(false)}
+              />
+            </div>
+          )}
 
           {/* 詳細情報（花苗の場合） */}
           {product.category === 'seedlings' && (

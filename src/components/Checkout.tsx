@@ -48,7 +48,40 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, onBack, onOrderComplete 
 
   // 価格計算
   const subtotal = cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-  const shippingFee = subtotal >= 5000 ? 0 : 500;
+  
+  // 地域別送料の計算
+  const calculateShippingFee = () => {
+    if (subtotal >= 5000) return 0; // 5000円以上で送料無料
+    
+    const prefectureZones: { [key: string]: string } = {
+      '北海道': 'hokkaido',
+      '青森県': 'tohoku', '岩手県': 'tohoku', '宮城県': 'tohoku', '秋田県': 'tohoku', '山形県': 'tohoku', '福島県': 'tohoku',
+      '茨城県': 'kanto', '栃木県': 'kanto', '群馬県': 'kanto', '埼玉県': 'kanto', '千葉県': 'kanto', '東京都': 'kanto', '神奈川県': 'kanto',
+      '新潟県': 'chubu', '富山県': 'chubu', '石川県': 'chubu', '福井県': 'chubu', '山梨県': 'chubu', '長野県': 'chubu', '岐阜県': 'chubu', '静岡県': 'chubu', '愛知県': 'chubu',
+      '三重県': 'kinki', '滋賀県': 'kinki', '京都府': 'kinki', '大阪府': 'kinki', '兵庫県': 'kinki', '奈良県': 'kinki', '和歌山県': 'kinki',
+      '鳥取県': 'chugoku', '島根県': 'chugoku', '岡山県': 'chugoku', '広島県': 'chugoku', '山口県': 'chugoku',
+      '徳島県': 'shikoku', '香川県': 'shikoku', '愛媛県': 'shikoku', '高知県': 'shikoku',
+      '福岡県': 'kyushu', '佐賀県': 'kyushu', '長崎県': 'kyushu', '熊本県': 'kyushu', '大分県': 'kyushu', '宮崎県': 'kyushu', '鹿児島県': 'kyushu',
+      '沖縄県': 'okinawa'
+    };
+    
+    const zoneRates: { [key: string]: number } = {
+      'kyushu': 600,
+      'shikoku': 700,
+      'chugoku': 700,
+      'kinki': 800,
+      'chubu': 900,
+      'kanto': 1000,
+      'tohoku': 1100,
+      'hokkaido': 1300,
+      'okinawa': 1400
+    };
+    
+    const zone = prefectureZones[customerInfo.prefecture];
+    return zone ? zoneRates[zone] : 600; // デフォルトは九州料金
+  };
+  
+  const shippingFee = calculateShippingFee();
   const total = subtotal + shippingFee;
 
   // 入力値の変更ハンドラー
@@ -298,15 +331,62 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, onBack, onOrderComplete 
                   <label className="block text-sm font-medium text-good-blue-brown mb-1">
                     都道府県 <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
+                  <select
                     value={customerInfo.prefecture}
                     onChange={(e) => handleInputChange('prefecture', e.target.value)}
                     className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-good-blue-gold focus:border-transparent ${
                       errors.prefecture ? 'border-red-500' : 'border-gray-300'
                     }`}
-                    placeholder="大分県"
-                  />
+                  >
+                    <option value="">選択してください</option>
+                    <option value="北海道">北海道</option>
+                    <option value="青森県">青森県</option>
+                    <option value="岩手県">岩手県</option>
+                    <option value="宮城県">宮城県</option>
+                    <option value="秋田県">秋田県</option>
+                    <option value="山形県">山形県</option>
+                    <option value="福島県">福島県</option>
+                    <option value="茨城県">茨城県</option>
+                    <option value="栃木県">栃木県</option>
+                    <option value="群馬県">群馬県</option>
+                    <option value="埼玉県">埼玉県</option>
+                    <option value="千葉県">千葉県</option>
+                    <option value="東京都">東京都</option>
+                    <option value="神奈川県">神奈川県</option>
+                    <option value="新潟県">新潟県</option>
+                    <option value="富山県">富山県</option>
+                    <option value="石川県">石川県</option>
+                    <option value="福井県">福井県</option>
+                    <option value="山梨県">山梨県</option>
+                    <option value="長野県">長野県</option>
+                    <option value="岐阜県">岐阜県</option>
+                    <option value="静岡県">静岡県</option>
+                    <option value="愛知県">愛知県</option>
+                    <option value="三重県">三重県</option>
+                    <option value="滋賀県">滋賀県</option>
+                    <option value="京都府">京都府</option>
+                    <option value="大阪府">大阪府</option>
+                    <option value="兵庫県">兵庫県</option>
+                    <option value="奈良県">奈良県</option>
+                    <option value="和歌山県">和歌山県</option>
+                    <option value="鳥取県">鳥取県</option>
+                    <option value="島根県">島根県</option>
+                    <option value="岡山県">岡山県</option>
+                    <option value="広島県">広島県</option>
+                    <option value="山口県">山口県</option>
+                    <option value="徳島県">徳島県</option>
+                    <option value="香川県">香川県</option>
+                    <option value="愛媛県">愛媛県</option>
+                    <option value="高知県">高知県</option>
+                    <option value="福岡県">福岡県</option>
+                    <option value="佐賀県">佐賀県</option>
+                    <option value="長崎県">長崎県</option>
+                    <option value="熊本県">熊本県</option>
+                    <option value="大分県">大分県</option>
+                    <option value="宮崎県">宮崎県</option>
+                    <option value="鹿児島県">鹿児島県</option>
+                    <option value="沖縄県">沖縄県</option>
+                  </select>
                   {errors.prefecture && (
                     <p className="text-red-500 text-xs mt-1">{errors.prefecture}</p>
                   )}
@@ -499,9 +579,19 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, onBack, onOrderComplete 
                   <span>¥{subtotal.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-good-blue-brown/60">送料</span>
-                  <span>{shippingFee === 0 ? '無料' : `¥${shippingFee.toLocaleString()}`}</span>
+                  <span className="text-good-blue-brown/60">
+                    送料
+                    {customerInfo.prefecture && ` (${customerInfo.prefecture})`}
+                  </span>
+                  <span className={shippingFee === 0 ? 'text-green-600 font-medium' : ''}>
+                    {shippingFee === 0 ? '無料' : `¥${shippingFee.toLocaleString()}`}
+                  </span>
                 </div>
+                {subtotal >= 5000 && (
+                  <p className="text-xs text-green-600 mt-1">
+                    5,000円以上のご購入で送料無料
+                  </p>
+                )}
                 {paymentMethod === 'cod' && (
                   <div className="flex justify-between text-sm">
                     <span className="text-good-blue-brown/60">代引手数料</span>

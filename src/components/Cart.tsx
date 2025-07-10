@@ -1,6 +1,7 @@
-import React from 'react';
-import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, Calculator } from 'lucide-react';
 import { CartItem } from '../types';
+import ShippingCalculatorSimple from './ShippingCalculatorSimple';
 
 interface CartProps {
   cartItems: CartItem[];
@@ -17,6 +18,7 @@ const Cart: React.FC<CartProps> = ({
   onContinueShopping,
   onCheckout 
 }) => {
+  const [showShippingCalculator, setShowShippingCalculator] = useState(false);
   const subtotal = cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
   const shippingFee = subtotal >= 5000 ? 0 : 500; // 5000円以上で送料無料
   const total = subtotal + shippingFee;
@@ -43,6 +45,7 @@ const Cart: React.FC<CartProps> = ({
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-2xl md:text-3xl font-bold text-good-blue-brown mb-8">ショッピングカート</h1>
+      
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* カートアイテム一覧 */}
@@ -147,8 +150,26 @@ const Cart: React.FC<CartProps> = ({
             >
               お買い物を続ける
             </button>
+            
+            <button
+              onClick={() => setShowShippingCalculator(!showShippingCalculator)}
+              className="w-full flex items-center justify-center gap-2 text-good-blue-gold py-2 rounded-lg hover:bg-good-blue-light transition-colors text-sm mt-2"
+            >
+              <Calculator className="h-4 w-4" />
+              送料を計算する
+            </button>
           </div>
         </div>
+        
+        {/* 送料計算機 */}
+        {showShippingCalculator && (
+          <div className="mt-6">
+            <ShippingCalculatorSimple 
+              subtotal={subtotal}
+              onClose={() => setShowShippingCalculator(false)}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

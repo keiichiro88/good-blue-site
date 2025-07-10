@@ -271,6 +271,16 @@ npm run dev
 2. **HEIC形式対応**: `sips`コマンドでの一括変換手法
 3. **開発環境の使い分け**: Cursor（サーバー起動）とClaude Code（コード編集）
 
+## 📚 関連ドキュメント
+
+プロジェクトには以下のドキュメントが用意されています：
+
+1. **IMPLEMENTATION_GUIDE.md** - 実装済み機能の詳細説明
+2. **USAGE_GUIDE.md** - スタッフ向けの使い方ガイド
+3. **DEPLOYMENT_GUIDE.md** - デプロイメント・運用ガイド（Vercel/Supabase/Stripe）
+
+これらのドキュメントも併せて参照し、実装時に整合性を保つようにしてください。
+
 ### **次回セッション開始時の確認事項**
 1. **開発サーバー起動確認**: Cursorで`npm run dev`
 2. **画像表示確認**: ShopAtmosphereセクションの7枚の画像

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ShoppingCart, User, Menu, Heart } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, Heart, Package2 } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 
 interface HeaderProps {
@@ -122,6 +122,13 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount, onSear
           <div className="flex items-center space-x-2 md:space-x-4">
             <button className="hidden md:block p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200">
               <User className="h-6 w-6" />
+            </button>
+            <button 
+              className="hidden md:block p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200"
+              onClick={() => onCategoryChange('inventory')}
+              title="在庫管理（スタッフ専用）"
+            >
+              <Package2 className="h-6 w-6" />
             </button>
             <button 
               className="p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 relative"

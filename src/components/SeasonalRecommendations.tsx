@@ -12,6 +12,7 @@ interface SeasonalRecommendationsProps {
   onProductClick: (product: Product) => void;
   onToggleFavorite: (product: Product) => void;
   isFavorite: (productId: string) => boolean;
+  onCategoryChange?: (category: string) => void;
 }
 
 const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
@@ -19,7 +20,8 @@ const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
   onAddToCart,
   onProductClick,
   onToggleFavorite,
-  isFavorite
+  isFavorite,
+  onCategoryChange
 }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -184,7 +186,10 @@ const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
                         20%OFF
                       </span>
                     </div>
-                    <button className="w-full bg-gray-900 text-white py-2 md:py-3 rounded text-sm md:text-base font-medium hover:bg-gray-800 transition-colors mb-1 md:mb-2">
+                    <button 
+                      onClick={() => onCategoryChange && onCategoryChange('special-set')}
+                      className="w-full bg-gray-900 text-white py-2 md:py-3 rounded text-sm md:text-base font-medium hover:bg-gray-800 transition-colors mb-1 md:mb-2"
+                    >
                       詳細を見る
                     </button>
                     <p className="text-xs text-gray-500 text-center">

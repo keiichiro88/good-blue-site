@@ -22,6 +22,7 @@ import OnlineStorePage from './components/OnlineStorePage';
 import CareGuidePage from './components/CareGuidePage';
 import ComingSoonPage from './components/ComingSoonPage';
 import LegalNoticePage from './components/LegalNoticePage';
+import SpecialSetPage from './components/SpecialSetPage';
 import { Phone } from 'lucide-react';
 import { products as initialProducts } from './data/products';
 import { reviews as initialReviews } from './data/reviews';
@@ -142,8 +143,11 @@ function App() {
     
     // 特定のページに遷移時は上部にスクロール
     if (category === 'cart' || category === 'checkout' || category === 'favorites' || category === 'inventory' || 
-        category === 'seedlings' || category === 'coffee' || category === 'gift') {
-      window.scrollTo(0, 0);
+        category === 'seedlings' || category === 'coffee' || category === 'gift' || category === 'special-set') {
+      // モバイルでの動作を確実にするため、わずかな遅延を追加
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
     }
   };
 
@@ -318,6 +322,7 @@ function App() {
   const showCareGuide = currentCategory === 'care' && !selectedProduct;
   const showContact = currentCategory === 'contact' && !selectedProduct;
   const showLegalNotice = currentCategory === 'legal' && !selectedProduct;
+  const showSpecialSet = currentCategory === 'special-set' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -349,6 +354,7 @@ function App() {
             onProductClick={handleProductClick}
             onToggleFavorite={handleToggleFavorite}
             isFavorite={isFavorite}
+            onCategoryChange={handleCategoryChange}
           />
           <AboutSection />
         </>
@@ -589,6 +595,14 @@ function App() {
       {!comingSoonPage && showLegalNotice && (
         <LegalNoticePage
           onCategoryChange={handleCategoryChange}
+        />
+      )}
+
+      {!comingSoonPage && showSpecialSet && (
+        <SpecialSetPage
+          onGoBack={() => handleCategoryChange('all')}
+          onAddToCart={handleAddToCart}
+          products={products}
         />
       )}
 

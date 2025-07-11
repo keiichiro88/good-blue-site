@@ -123,13 +123,16 @@ const Header: React.FC<HeaderProps> = ({ onCategoryChange, cartItemCount, onSear
             <button className="hidden md:block p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200">
               <User className="h-6 w-6" />
             </button>
-            <button 
-              className="hidden md:block p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200"
-              onClick={() => onCategoryChange('inventory')}
-              title="在庫管理（スタッフ専用）"
-            >
-              <Package2 className="h-6 w-6" />
-            </button>
+            {/* 在庫管理ボタン（開発環境のみ表示） */}
+            {import.meta.env.DEV && (
+              <button 
+                className="hidden md:block p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200"
+                onClick={() => onCategoryChange('inventory')}
+                title="在庫管理（スタッフ専用）"
+              >
+                <Package2 className="h-6 w-6" />
+              </button>
+            )}
             <button 
               className="p-2 text-good-blue-brown hover:text-good-blue-gold transition-colors duration-200 relative"
               onClick={() => onCategoryChange('favorites')}

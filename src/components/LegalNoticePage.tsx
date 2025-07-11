@@ -146,13 +146,13 @@ const LegalNoticePage: React.FC<LegalNoticePageProps> = ({ onCategoryChange }) =
             {/* 公開メールアドレス */}
             <div className="border-b border-gray-200 pb-4">
               <h3 className="font-semibold text-gray-700 mb-2">公開メールアドレス</h3>
-              <p className="text-gray-600">demo@example.com （※デモ用）</p>
+              <p className="text-gray-600">info@good-blue.com</p>
             </div>
 
             {/* ホームページアドレス */}
             <div>
               <h3 className="font-semibold text-gray-700 mb-2">ホームページアドレス</h3>
-              <p className="text-gray-600">https://demo.example.com （※デモ用）</p>
+              <p className="text-gray-600">https://good-blue.com</p>
             </div>
           </div>
 

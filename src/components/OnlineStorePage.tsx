@@ -85,7 +85,7 @@ const OnlineStorePage: React.FC<OnlineStorePageProps> = ({ onCategoryChange }) =
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">オンラインストア</h1>
+            <h1 className="text-6xl md:text-8xl font-display font-bold text-gray-900 mb-6">オンラインストア</h1>
             <p className="text-base md:text-lg text-gray-600">
               朝のコーヒーで、ほっと一息。窓辺の花に、にっこり笑顔。<br />
               goodblueがお届けする、毎日の小さな幸せのかたち。

@@ -23,6 +23,8 @@ import CareGuidePage from './components/CareGuidePage';
 import ComingSoonPage from './components/ComingSoonPage';
 import LegalNoticePage from './components/LegalNoticePage';
 import SpecialSetPage from './components/SpecialSetPage';
+import TermsOfService from './components/TermsOfService';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import { Phone } from 'lucide-react';
 import { products as initialProducts } from './data/products';
 import { reviews as initialReviews } from './data/reviews';
@@ -323,6 +325,8 @@ function App() {
   const showContact = currentCategory === 'contact' && !selectedProduct;
   const showLegalNotice = currentCategory === 'legal' && !selectedProduct;
   const showSpecialSet = currentCategory === 'special-set' && !selectedProduct;
+  const showTermsOfService = currentCategory === 'terms' && !selectedProduct;
+  const showPrivacyPolicy = currentCategory === 'privacy' && !selectedProduct;
 
   return (
     <div className="min-h-screen bg-good-blue-cream">
@@ -606,7 +610,19 @@ function App() {
         />
       )}
 
-      {!comingSoonPage && <NewFooter />}
+      {!comingSoonPage && showTermsOfService && (
+        <TermsOfService
+          onCategoryChange={handleCategoryChange}
+        />
+      )}
+
+      {!comingSoonPage && showPrivacyPolicy && (
+        <PrivacyPolicy
+          onCategoryChange={handleCategoryChange}
+        />
+      )}
+
+      {!comingSoonPage && <NewFooter onCategoryChange={handleCategoryChange} />}
       
       <Toast
         message={toast.message}

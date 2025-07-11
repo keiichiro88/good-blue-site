@@ -97,10 +97,10 @@ const SeasonalRecommendations: React.FC<SeasonalRecommendationsProps> = ({
           variants={containerVariants}
         >
           {/* セクションヘッダー */}
-          <div className="text-left mb-16">
-            <h2 className="text-2xl md:text-3xl font-display font-medium text-gray-800 mb-3">
+          <div className="text-left mb-6 md:mb-12 px-4 md:px-8">
+            <h3 className="text-lg md:text-xl font-medium text-gray-800">
               Recommended おすすめ商品
-            </h2>
+            </h3>
           </div>
 
           {/* おすすめ商品グリッド */}

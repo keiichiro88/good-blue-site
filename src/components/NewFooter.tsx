@@ -1,7 +1,11 @@
 import React from 'react';
 import { Phone, MapPin, Clock, Instagram } from 'lucide-react';
 
-const NewFooter: React.FC = () => {
+interface NewFooterProps {
+  onCategoryChange?: (category: string) => void;
+}
+
+const NewFooter: React.FC<NewFooterProps> = ({ onCategoryChange }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -89,7 +93,31 @@ const NewFooter: React.FC = () => {
                 <a href="#" className="hover:text-good-blue-cream transition-colors">よくあるご質問</a>
               </li>
               <li>
-                <a href="#" className="hover:text-good-blue-cream transition-colors">プライバシーポリシー</a>
+                <a 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); onCategoryChange?.('privacy'); }}
+                  className="hover:text-good-blue-cream transition-colors cursor-pointer"
+                >
+                  プライバシーポリシー
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); onCategoryChange?.('terms'); }}
+                  className="hover:text-good-blue-cream transition-colors cursor-pointer"
+                >
+                  利用規約
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); onCategoryChange?.('legal'); }}
+                  className="hover:text-good-blue-cream transition-colors cursor-pointer"
+                >
+                  特定商取引法に基づく表記
+                </a>
               </li>
             </ul>
           </div>
